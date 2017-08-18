@@ -13,24 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{a8e29f18-1247-4ab5-a17d-09df4f55828d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\graphics">
+      <UniqueIdentifier>{da6880b7-c1f0-482b-93e3-b2245a1f9f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{9113b067-e89c-47fb-9c77-0c437a8d49a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Context.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RenderObjects.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\draw.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\graphics\Context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\glinc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\graphics\Vertex.h">
-      <Filter>Header Files</Filter>
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Context.h">
+      <Filter>include\graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics\RenderObjects.h">
-      <Filter>Header Files</Filter>
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\glinc.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\draw.h">
+      <Filter>include\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
