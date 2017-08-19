@@ -46,3 +46,22 @@ bool Context::term()
 	handle = nullptr;
 	return true;
 }
+
+bool Context::getKey(int key)
+{
+	return true;// (glfwGetKey(handle, glfwGetKey) == );
+}
+
+bool Context::getMNouseButton(int button)
+{
+	return false;
+}
+
+void Context::getMousePosition(double & x_out, double & y_out)
+{
+}
+
+double Context::getTime()
+{
+	return glfwGetTime();
+}
