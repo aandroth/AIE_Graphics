@@ -44,10 +44,10 @@
     <ClInclude Include="include\graphics\RenderObjects.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="source\glinc.h">
-      <Filter>source</Filter>
-    </ClInclude>
     <ClInclude Include="include\graphics\draw.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\glinc.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
   </ItemGroup>

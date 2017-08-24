@@ -5,8 +5,6 @@
 #include "graphics\draw.h"
 #include <vector>
 using std::vector;
-#include <iostream>
-using std::cout;
 
 int main()
 {
@@ -133,15 +131,15 @@ int main()
 		"}\n";
 
 	Shader s = makeShader(vsource, fsource);
-
+	int loc = 0, tex = 0;
 	Framebuffer f = { 0, 800, 600 };
 
 	while (context.step())
 	{
 		clearFrameBuffer(f);
 
-		setUniform(s, 0, (float)context.getTime());
-		setUniform(s, 4, t_magYel, 0);
+		setUniforms(s, loc, tex, (float)context.getTime());
+		//setUniforms(s, 4, t_magYel, 0);
 		s0_draw(f, s, g);
 	}
 

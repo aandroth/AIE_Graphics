@@ -1,6 +1,8 @@
 #pragma once
 
+#include "glinc.h"
 #include "glm\glm.hpp"
+#include "glm\gtc\type_ptr.hpp"
 
 struct Vertex;
 struct Geometry

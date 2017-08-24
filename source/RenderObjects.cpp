@@ -1,7 +1,6 @@
 
 #include "..\include\graphics\Vertex.h"
 #include "..\include\graphics\RenderObjects.h"
-#include "glinc.h"
 #ifdef _DEBUG
 #include <iostream>
 #endif // DEBUG

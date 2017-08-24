@@ -1,5 +1,4 @@
 #include "..\include\graphics\draw.h"
-#include "glinc.h"
 
 void s0_draw(const Framebuffer & f, const Shader & s, const Geometry & g)
 {

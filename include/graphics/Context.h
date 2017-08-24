@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RenderObjects.h"
+
 class GLFWwindow;
 
 class Context
