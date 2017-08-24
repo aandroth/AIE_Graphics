@@ -2,7 +2,7 @@
 
 #include "RenderObjects.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 
 class Context
 {

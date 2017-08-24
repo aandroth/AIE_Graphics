@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glinc.h"
+#include "glm\geometric.hpp"
 #include "glm\glm.hpp"
 #include "glm\gtc\type_ptr.hpp"
 

@@ -1,7 +1,6 @@
 
-#include "..\..\include\graphics\Context.h"
+#include "graphics\Context.h"
 #include "graphics\Vertex.h"
-#include "graphics\RenderObjects.h"
 #include "graphics\draw.h"
 #include <vector>
 using std::vector;

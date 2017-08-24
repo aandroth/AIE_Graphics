@@ -1,8 +1,8 @@
 
-#include "..\..\include\graphics\Context.h"
+#include "graphics\Context.h"
 #include "graphics\Vertex.h"
-#include "graphics\RenderObjects.h"
 #include "graphics\draw.h"
+#include "graphics\load.h"
 #include <vector>
 using std::vector;
 
@@ -79,7 +79,7 @@ int main()
 	const char *vsource = "#version 450\n"
 		"layout(location = 0) in vec4 position; \n"
 		"layout(location = 1) in vec4 color; \n"
-		"layout(location = 0) uniform float time; \n"
+		//"layout(location = 2) uniform float time; \n"
 		"out vec4 vCol; \n"
 		"out vec2 vUV; \n"
 		"out vec4 vPos; \n"
@@ -107,8 +107,7 @@ int main()
 		"in vec2 vUV; \n"
 		"out vec4 outColor; \n"
 		"layout(location = 0) uniform float time; \n"
-		"layout(location = 4) uniform sampler2D map; \n"
-		//"layout(location = 5) uniform sampler2D mask; \n"
+		"layout(location = 1) uniform sampler2D map; \n"
 
 		"void main()\n{\n"
 		//"outColor = vCol;\n"
@@ -123,7 +122,8 @@ int main()
 		//"}\n"
 		//"outColor = vec4(1, 1, 0, 1);\n"
 		"vec2 outUV = vUV;\n"
-		"outUV.x += cos(time + outUV.y) + sin(time*1 + outUV.y*0.5)*0.15f;\n"
+		"outUV.x += cos(time + outUV.y)*0.5 + sin(time*1 + outUV.y*0.5)*0.15f;\n"
+		//"outUV.y = sin(time + outUV.y*0.5)*0.15f;\n"
 		"outColor = texture(map, outUV.xy);\n"
 		//"outColor.y -= (cos(time + (gl_FragCoord.x+0.75f)/5.0f));\n"
 		//"outColor.z += abs(sin(time + (gl_FragCoord.x+0.75f)/10.0f));\n"
@@ -137,8 +137,8 @@ int main()
 	while (context.step())
 	{
 		clearFrameBuffer(f);
-
-		setUniforms(s, loc, tex, (float)context.getTime());
+		loc = 0, tex = 0;
+		setUniforms(s, loc, tex, (float)context.getTime(), t_magYel);
 		//setUniforms(s, 4, t_magYel, 0);
 		s0_draw(f, s, g);
 	}

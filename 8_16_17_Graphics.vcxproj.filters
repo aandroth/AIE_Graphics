@@ -33,6 +33,9 @@
     <ClCompile Include="source\draw.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="source\load.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics\Vertex.h">
@@ -47,8 +50,11 @@
     <ClInclude Include="include\graphics\draw.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\graphics\glinc.h">
+    <ClInclude Include="include\graphics\load.h">
       <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\glinc.h">
+      <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
