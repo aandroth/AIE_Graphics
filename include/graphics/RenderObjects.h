@@ -6,7 +6,8 @@
 #include "glm\gtc\type_ptr.hpp"
 
 struct Vertex;
-struct Geometry
+
+struct Geometry 
 {
 	unsigned handle, vbo, ibo, size;
 };

@@ -47,8 +47,22 @@ Geometry loadGeometry(const char *path)
 
 	size_t isize = shapes[0].mesh.indices.size();
 	size_t *indices = new unsigned[isize];
-	for (size_t ii = 0; ii < isize; ++ii)
-		indices[ii] = shapes[0].mesh.indices[ii].vertex_index;
+	for (size_t ii = 0; ii < vsize; ++ii)
+	{
+		indices[ii] = ii;
+		
+		int pi = shapes[0].mesh.indices[ii].vertex_index;
+		int ni = shapes[0].mesh.indices[ii].normal_index;
+		int ti = shapes[0].mesh.indices[ii].texcoord_index;
+
+		const float *p = &attrib.vertices[pi * 3];
+		const float *n = &attrib.normals[ni * 3];
+		const float *t = &attrib.texcoords[ti * 2];
+
+		verts[ii].position = { p[0], p[1], p[2], 1 };
+		verts[ii].texCoord = { t[0], t[1] };
+		verts[ii].normal   = { n[0], n[1], n[2], 0 };
+	}
 
 	retval = MakeGeometry(verts, vsize, indices, isize);
 

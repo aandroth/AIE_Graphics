@@ -4,6 +4,6 @@
 
 struct Vertex
 {
-	glm::vec4 position, color;
+	glm::vec4 position, color, normal;
 	glm::vec2 texCoord;
 };

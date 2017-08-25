@@ -75,7 +75,7 @@ int main()
 
 	//Texture t_magYel = makeTexture(7, 1, 3, pixels);
 
-	Texture t_magYel = loadTexture("../../resources/Blue.jpg");
+	Texture t_magYel = loadTexture("../../resources/textures/Blue.jpg");
 	Texture t_mask = makeTexture(20, 1, 1, pixels);
 
 	const char *vsource = "#version 450\n"

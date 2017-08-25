@@ -4,6 +4,11 @@
 
 void s0_draw(const Framebuffer &f, const Shader &s, const Geometry &g);
 
+void clearFrameBuffer(const Framebuffer & fb, bool color = true, bool depth = true);
+
+enum RenderFlag {DEPTH = 1};
+void setFlags(int flags);
+
 void setUniform(const Shader &shader, int location, float value);
 void setUniform(const Shader &shader, int location, int value);
 void setUniform(const Shader &shader, int location, const Texture &value, unsigned slot);
@@ -13,6 +18,9 @@ namespace __internal
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, float val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, int val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Texture &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val);
+	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val);
 }
 
 template<typename T, typename ...U>
@@ -29,4 +37,4 @@ void setUniforms(const Shader &s, int &loc_io, int &tex_io, const T &val)
 }
 
 
-void clearFrameBuffer(const Framebuffer & fb);
+void clearFrameBuffer(const Framebuffer & fb, bool color, bool depth);

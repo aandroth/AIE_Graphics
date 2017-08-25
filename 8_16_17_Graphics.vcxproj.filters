@@ -59,5 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="8_16_17_Graphics.VC.db" />
+    <None Include="cube.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cube.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

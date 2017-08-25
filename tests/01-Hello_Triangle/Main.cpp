@@ -68,6 +68,7 @@ int main()
 	const char *vsource = "#version 450\n"
 		"layout(location = 0) in vec4 position; \n"
 		"layout(location = 1) in vec4 color; \n"
+		"layout(location = 2) in mat4 vert; \n"
 		"out vec4 vCol; \n"
 		"out vec4 vPos; \n"
 		"void main()\n{\nvCol = color;"
@@ -83,7 +84,6 @@ int main()
 	Shader s = makeShader(vsource, fsource);
 
 	Framebuffer f = {0, 800, 600};
-
 
 	while (context.step())
 	{

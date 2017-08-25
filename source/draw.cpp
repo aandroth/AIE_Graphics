@@ -16,6 +16,18 @@ void setUniform(const Shader & shader, int location, float value)
 	glProgramUniform1f(shader.handle, location, value);
 }
 
+void setUniform(const Shader & shader, int location, int value)
+{
+	glProgramUniform1i(shader.handle, location, value);
+}
+
+void setUniform(const Shader & shader, int location, const Texture & value, unsigned slot)
+{
+	glActiveTexture(GL_TEXTURE0 + slot);
+	glBindTexture(GL_TEXTURE_2D, value.handle);
+	glProgramUniform1i(shader.handle, location, slot);
+}
+
 void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, float val)
 {
 	glProgramUniform1f(s.handle, loc_io++, val);
@@ -32,21 +44,32 @@ void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const T
 	glProgramUniform1i(s.handle, loc_io++, tex_io++);
 }
 
-//void setUniform(const Shader & shader, int location, int value)
-//{
-//	glProgramUniform1i(shader.handle, location, value);
-//}
-//
-//void setUniform(const Shader & shader, int location, const Texture & value, unsigned slot)
-//{
-//	glActiveTexture(GL_TEXTURE0 + slot);
-//	glBindTexture(GL_TEXTURE_2D, value.handle);
-//	glProgramUniform1i(shader.handle, location, slot);
-//}
+void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val)
+{
+	//glProgramUniform3fv(s.handle, loc_io++, 3, val);
+}
 
-void clearFrameBuffer(const Framebuffer & fb)
+void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val)
+{
+
+}
+
+void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val)
+{
+
+}
+
+void clearFrameBuffer(const Framebuffer & fb, bool color, bool depth)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, fb.handle);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void setFlags(int flags)
+{
+	if (flags & RenderFlag::DEPTH)
+		glEnable(GL_DEPTH_TEST);
+	else
+		glDisable(GL_DEPTH_TEST);
 }
