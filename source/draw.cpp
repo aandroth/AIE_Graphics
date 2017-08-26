@@ -43,26 +43,23 @@ void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const T
 	glBindTexture(GL_TEXTURE_2D, val.handle);
 	glProgramUniform1i(s.handle, loc_io++, tex_io++);
 }
-
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val)
+void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val)
 {
-	//glProgramUniform3fv(s.handle, loc_io++, 3, val);
+	glProgramUniform3fv(s.handle, loc_io++, 1, glm::value_ptr(val));
 }
-
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val)
+void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val)
 {
-
+	glProgramUniform4fv(s.handle, loc_io++, 1, glm::value_ptr(val));
 }
-
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val)
+void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val)
 {
-
+	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val));
 }
 
 void clearFrameBuffer(const Framebuffer & fb, bool color, bool depth)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, fb.handle);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT*color | GL_DEPTH_BUFFER_BIT*depth);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

@@ -59,10 +59,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="8_16_17_Graphics.VC.db" />
-    <None Include="cube.vert">
+    <None Include="resources\cube.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="cube.frag">
+    <None Include="resources\cube.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\lambert.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\lambert.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\mvplite.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\mvplite.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

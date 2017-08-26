@@ -6,6 +6,19 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <random>
+
+glm::vec4 randColor()
+{
+	return{
+		rand() / (float)RAND_MAX,
+		rand() / (float)RAND_MAX,
+		rand() / (float)RAND_MAX, 1 };
+}
+
 Texture loadTexture(const char *path)
 {
 	Texture retval;
@@ -36,17 +49,13 @@ Geometry loadGeometry(const char *path)
 	// To do this, we have to change [pppp][nnnn][tttt]
 	// to this, [pnt][pnt][pnt][pnt] into the vertices
 
-	size_t vsize = attrib.vertices.size() / 3;
-	Vertex *verts = new Vertex[vsize];
-
-	for (size_t ii = 0; ii < vsize; ++ii)
-	{
-		const float *p = &attrib.vertices[ii * 3];
-		verts[ii].position = { p[0], p[1], p[2], 1 };
-	}
-
 	size_t isize = shapes[0].mesh.indices.size();
 	size_t *indices = new unsigned[isize];
+
+	size_t vsize = isize;
+	Vertex *verts = new Vertex[vsize];
+
+
 	for (size_t ii = 0; ii < vsize; ++ii)
 	{
 		indices[ii] = ii;
@@ -62,6 +71,8 @@ Geometry loadGeometry(const char *path)
 		verts[ii].position = { p[0], p[1], p[2], 1 };
 		verts[ii].texCoord = { t[0], t[1] };
 		verts[ii].normal   = { n[0], n[1], n[2], 0 };
+
+		verts[ii].color = randColor();
 	}
 
 	retval = MakeGeometry(verts, vsize, indices, isize);
@@ -72,14 +83,37 @@ Geometry loadGeometry(const char *path)
 	return retval;
 }
 
-//Shader loadShader(const char *vpath, const char *fpath)
-//{
-//	Shader retval = { 0 };
-//
-//	//const char *vsource;
-//	//const char *fsource;
-//
-//	//retval = makeShader(vsource, fsource);
-//
-//	return retval;
-//}
+std::string readFile(const char *path)
+{
+	std::string content = "";
+	std::ifstream ifStream(path, std::ios::in);
+
+	if (!ifStream.is_open())
+	{
+		std::cerr << "Could not read the file. Either the file is unreadable or does not exist.\n";
+		return "";
+	}
+
+	std::string line;
+	while(!ifStream.eof())
+	{
+		std::getline(ifStream, line);
+		content.append(line + "\n");
+	}
+
+	return content;
+}
+
+Shader loadShader(const char *vpath, const char *fpath)
+{
+	Shader retval = { 0 };
+
+	std::string vstring = readFile(vpath);
+	std::string fstring = readFile(fpath);
+	const char *vsource = vstring.c_str();
+	const char *fsource = fstring.c_str();
+
+	retval = makeShader(vsource, fsource);
+
+	return retval;
+}
