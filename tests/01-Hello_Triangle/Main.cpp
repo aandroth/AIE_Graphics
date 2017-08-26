@@ -1,5 +1,5 @@
 
-#include "..\..\include\graphics\Context.h"
+#include "graphics\Context.h"
 #include "graphics\Vertex.h"
 #include "graphics\RenderObjects.h"
 #include "graphics\draw.h"
@@ -85,10 +85,9 @@ int main()
 
 	Framebuffer f = {0, 800, 600};
 
-
 	while (context.step())
 	{
-		s0_draw(f, s, g);
+		//s0_draw(f, s, g);
 	}
 
 	freeGeometry(g);

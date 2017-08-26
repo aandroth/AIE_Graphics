@@ -1,5 +1,5 @@
 
-#include "..\..\include\graphics\Context.h"
+#include "graphics\Context.h"
 #include "graphics\Vertex.h"
 #include "graphics\RenderObjects.h"
 #include "graphics\draw.h"
@@ -90,16 +90,6 @@ int main()
 			"vCol = color;\n"
 			"vPos = position;\n"
 			"gl_Position = position;\n"
-			//"gl_Position.x += sin(time);\n"
-			//"gl_Position.y += sin(time + gl_Position.x + gl_Position.y)/5.0f;\n"
-
-			//"if(sin(sin(position.x)) < 0.1f)\n"
-			//"{\n"
-			//"vCol.x = 1.0f;\n"
-			//"vCol.y = 0.0f;\n"
-			//"vCol.z = 0.0f;\n"
-			//"}\n"
-
 			"vUV = position.xy;\n"
 		"}\n";
 
@@ -113,23 +103,9 @@ int main()
 		//"layout(location = 5) uniform sampler2D mask; \n"
 
 		"void main()\n{\n"
-		//"outColor = vCol;\n"
-		//"outColor.x *= 0.5f + abs(sin(time + gl_FragCoord.y/5.0f));\n"
-		//"outColor.y *= 0.5f + abs(sin(time + (gl_FragCoord.y+0.25f)/10.0f));\n"
-		//"outColor.z *= 0.5f + abs(sin(time + (gl_FragCoord.y+0.75f)/10.0f));\n"
-		//"outColor.z -= abs(sin(-time + (-gl_FragCoord.y+0.75f)/10.0f));\n"
-		//"outColor += abs(sin(time + gl_FragCoord.x/4.0f)/5.0f);\n"
-		//"if(sqrt(vPos.x*vPos.x + vPos.y*vPos.y) < 0.1f)\n"
-		//"{\n"
-		//"outColor.a = 1;\n"
-		//"}\n"
-		//"outColor = vec4(1, 1, 0, 1);\n"
-		"vec2 outUV = vUV;\n"
-		"outUV.x += cos(time + outUV.y) + sin(time*1 + outUV.y*0.5)*0.15f;\n"
-		"outColor = texture(map, outUV.xy);\n"
-		//"outColor.y -= (cos(time + (gl_FragCoord.x+0.75f)/5.0f));\n"
-		//"outColor.z += abs(sin(time + (gl_FragCoord.x+0.75f)/10.0f));\n"
-		//"outColor += (sin(time + gl_FragCoord.y)/10.0f);\n"
+		//"vec2 outUV = vUV;\n"
+		//"outUV.x += cos(time + outUV.y) + sin(time*1 + outUV.y*0.5)*0.15f;\n"
+		//"outColor = texture(map, outUV.xy);\n"
 		"}\n";
 
 	Shader s = makeShader(vsource, fsource);

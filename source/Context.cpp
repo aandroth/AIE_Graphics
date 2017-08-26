@@ -1,5 +1,7 @@
 #include "..\include\graphics\Context.h"
 #include "glinc.h"
+#include <iostream>
+using std::cout;
 
 #ifdef _DEBUG
 #include <iostream>
@@ -29,6 +31,7 @@ bool Context::init(size_t w, size_t h, const char * title)
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, 0, true);
 #endif
 
+	//printf("the version string is %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 	return true;
 }
