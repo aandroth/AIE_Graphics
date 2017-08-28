@@ -1,12 +1,9 @@
-
 #include "graphics\Context.h"
 #include "graphics\Vertex.h"
-#include "graphics\RenderObjects.h"
 #include "graphics\draw.h"
+#include "graphics\load.h"
 #include <vector>
 using std::vector;
-#include <iostream>
-using std::cout;
 
 int main()
 {
@@ -24,35 +21,31 @@ int main()
 	/*
 	for (int ii = 0; ii < (checkerH + 1); ++ii)
 	{
-		for (int jj = 0; jj < (checkerW + 1); ++jj)
-		{
-			verts[ii*(checkerW + 1) + jj].position = { 0.1f * jj, 0.1f*ii, 0, 1 };
-			verts[ii*(checkerW + 1) + jj].color = (jj % 2 != ii % 2) ? c0 : c1;
-		}
+	for (int jj = 0; jj < (checkerW + 1); ++jj)
+	{
+	verts[ii*(checkerW + 1) + jj].position = { 0.1f * jj, 0.1f*ii, 0, 1 };
+	verts[ii*(checkerW + 1) + jj].color = (jj % 2 != ii % 2) ? c0 : c1;
 	}
-
+	}
 	for (int ii = 0; ii < (checkerW); ++ii)
 	{
-		for (int jj = 0; jj < (checkerH); ++jj)
-		{
-
-			//idxs[ii*jj + jj] = { LB, RB, RT, LB, LT, RT };
-			//idxs[ii*jj + jj] = { 0, 1, 2, 0, 3, 2 };
-			idx_vec.push_back((ii + 1)*(checkerW + 1) + jj);     // LB
-			idx_vec.push_back((ii + 1)*(checkerW + 1) + jj + 1);   // RB
-			idx_vec.push_back((ii + 0)*(checkerW + 1) + jj + 1);   // RT
-			idx_vec.push_back((ii + 1)*(checkerW + 1) + jj);     // LB
-			idx_vec.push_back((ii + 0)*(checkerW + 1) + jj);     // LT
-			idx_vec.push_back((ii + 0)*(checkerW + 1) + jj + 1); // RT
-		}
+	for (int jj = 0; jj < (checkerH); ++jj)
+	{
+	//idxs[ii*jj + jj] = { LB, RB, RT, LB, LT, RT };
+	//idxs[ii*jj + jj] = { 0, 1, 2, 0, 3, 2 };
+	idx_vec.push_back((ii + 1)*(checkerW + 1) + jj);     // LB
+	idx_vec.push_back((ii + 1)*(checkerW + 1) + jj + 1);   // RB
+	idx_vec.push_back((ii + 0)*(checkerW + 1) + jj + 1);   // RT
+	idx_vec.push_back((ii + 1)*(checkerW + 1) + jj);     // LB
+	idx_vec.push_back((ii + 0)*(checkerW + 1) + jj);     // LT
+	idx_vec.push_back((ii + 0)*(checkerW + 1) + jj + 1); // RT
 	}
-
+	}
 	for (int ii = 0; ii < idx_vec.size(); ++ii)
 	{
-		idxs[ii] = idx_vec[ii];
+	idxs[ii] = idx_vec[ii];
 	}
-
-*/
+	*/
 	verts[0].position = { -0.5f, -0.5f, 0, 1 }; // LB
 	verts[0].color = { 0, 0, 1, 1 };
 	verts[0].texCoord = { verts[0].position.x, verts[0].position.y };
@@ -66,58 +59,87 @@ int main()
 	verts[3].color = { 1, 1, 1, 1 };
 	verts[3].texCoord = { verts[3].position.x, verts[3].position.y };
 
-	unsigned idxs[6] = {0, 1, 2, 0, 3, 2};
-	
+	unsigned idxs[6] = { 0, 1, 2, 0, 3, 2 };
+
 	Geometry g = MakeGeometry(verts, 4,
-							idxs, (6));
+		idxs, (6));
 
 	// RGB texture (3 channels), 2x1
 	unsigned char pixels[] = { 255, 0, 255,
-								255, 255, 0 };
+		255, 255, 0 };
 
 	Texture t_magYel = makeTexture(7, 1, 3, pixels);
 	Texture t_mask = makeTexture(20, 1, 1, pixels);
 
-	const char *vsource = "#version 450\n"
+	const char *vsource = "#version 430\n"
 		"layout(location = 0) in vec4 position; \n"
 		"layout(location = 1) in vec4 color; \n"
-		"layout(location = 0) uniform float time; \n"
+		//"layout(location = 2) uniform float time; \n"
 		"out vec4 vCol; \n"
 		"out vec2 vUV; \n"
 		"out vec4 vPos; \n"
 
 		"void main()\n{\n"
-			"vCol = color;\n"
-			"vPos = position;\n"
-			"gl_Position = position;\n"
-			"vUV = position.xy;\n"
+		"vCol = color;\n"
+		"vPos = position;\n"
+		"gl_Position = position;\n"
+		//"gl_Position.x += sin(time);\n"
+		//"gl_Position.y += sin(time + gl_Position.x + gl_Position.y)/5.0f;\n"
+
+		//"if(sin(sin(position.x)) < 0.1f)\n"
+		//"{\n"
+		//"vCol.x = 1.0f;\n"
+		//"vCol.y = 0.0f;\n"
+		//"vCol.z = 0.0f;\n"
+		//"}\n"
+
+		"vUV = position.xy;\n"
 		"}\n";
 
-	const char *fsource = "#version 450\n"
+	const char *fsource = "#version 430\n"
 		"in vec4 vCol; \n"
 		"in vec4 vPos; \n"
 		"in vec2 vUV; \n"
 		"out vec4 outColor; \n"
 		"layout(location = 0) uniform float time; \n"
-		"layout(location = 4) uniform sampler2D map; \n"
-		//"layout(location = 5) uniform sampler2D mask; \n"
+		"layout(location = 2) uniform sampler2D map; \n"
 
 		"void main()\n{\n"
-		//"vec2 outUV = vUV;\n"
-		//"outUV.x += cos(time + outUV.y) + sin(time*1 + outUV.y*0.5)*0.15f;\n"
-		//"outColor = texture(map, outUV.xy);\n"
+		//"outColor = vCol;\n"
+		//"outColor.x *= 0.5f + abs(sin(time + gl_FragCoord.y/5.0f));\n"
+		//"outColor.y *= 0.5f + abs(sin(time + (gl_FragCoord.y+0.25f)/10.0f));\n"
+		//"outColor.z *= 0.5f + abs(sin(time + (gl_FragCoord.y+0.75f)/10.0f));\n"
+		//"outColor.z -= abs(sin(-time + (-gl_FragCoord.y+0.75f)/10.0f));\n"
+		//"outColor += abs(sin(time + gl_FragCoord.x/4.0f)/5.0f);\n"
+		//"if(sqrt(vPos.x*vPos.x + vPos.y*vPos.y) < 0.1f)\n"
+		//"{\n"
+		//"outColor.a = 1;\n"
+		//"}\n"
+		//"outColor = vec4(1, 1, 0, 1);\n"
+		"vec2 outUV = vUV;\n"
+		"outUV.x += 2* sin(time + (cos(outUV.x) * sin(outUV.y))) + gl_FragCoord.y;\n" //cos(time + outUV.y)*0.5 + sin(time*1 + outUV.y*0.5)*0.15f;\n" + gl_FragCoord.xy
+		"outUV.y += 2* sin(time + (cos(outUV.x) * sin(outUV.y))) + gl_FragCoord.x;\n" //cos(time + outUV.y)*0.5 + sin(time*1 + outUV.y*0.5)*0.15f;\n" + gl_FragCoord.xy
+		//"outUV.y = sin(time + outUV.y*0.5)*0.15f;\n"
+		"outColor = texture(map, outUV);\n"
+		//"outColor.y -= (cos(time + (gl_FragCoord.x+0.75f)/5.0f));\n"
+		//"outColor.z += abs(sin(time + (gl_FragCoord.x+0.75f)/10.0f));\n"
+		//"outColor += (sin(time + gl_FragCoord.y)/10.0f);\n"
 		"}\n";
 
 	Shader s = makeShader(vsource, fsource);
-
+	int loc = 0, tex = 0;
 	Framebuffer f = { 0, 800, 600 };
 
 	while (context.step())
 	{
-		clearFrameBuffer(f);
+		
 
-		setUniform(s, 0, (float)context.getTime());
-		setUniform(s, 4, t_magYel, 0);
+		clearFrameBuffer(f);
+		loc = 0, tex = 0;
+		if(context.getKey('A'))
+			setUniforms(s, loc, tex, (float)context.getTime(), t_magYel);
+		else
+			setUniforms(s, loc, tex, 0.0f, t_magYel);
 		s0_draw(f, s, g);
 	}
 

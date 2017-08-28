@@ -1,7 +1,6 @@
 
 #include "..\include\graphics\Vertex.h"
 #include "..\include\graphics\RenderObjects.h"
-#include "glinc.h"
 #ifdef _DEBUG
 #include <iostream>
 #endif // DEBUG
@@ -33,6 +32,10 @@ Geometry MakeGeometry(const Vertex *vertices, size_t vsize,
 	// texCoord
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
+
+	// normals
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)40);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -138,8 +141,7 @@ Texture makeTexture(unsigned w, unsigned h, unsigned c, const unsigned char * pi
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, f, w, h, 0, f, 
-		GL_UNSIGNED_BYTE, pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, f, w, h, 0, f, GL_UNSIGNED_BYTE, pixels);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return retVal;

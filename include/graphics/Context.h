@@ -1,6 +1,8 @@
 #pragma once
 
-class GLFWwindow;
+#include "RenderObjects.h"
+
+struct GLFWwindow;
 
 class Context
 {
@@ -18,7 +20,7 @@ public:
 	bool term();
 
 	bool getKey(int key);
-	bool getMNouseButton(int button);
+	bool getMouseButton(int button);
 	void getMousePosition(double &x_out, double &y_out);
 	double getTime();
 };

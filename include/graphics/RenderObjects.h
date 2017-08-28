@@ -1,9 +1,13 @@
 #pragma once
 
+#include "glinc.h"
+#include "glm\geometric.hpp"
 #include "glm\glm.hpp"
+#include "glm\gtc\type_ptr.hpp"
 
 struct Vertex;
-struct Geometry
+
+struct Geometry 
 {
 	unsigned handle, vbo, ibo, size;
 };
@@ -15,7 +19,8 @@ void freeGeometry(Geometry &g);
 
 struct Shader
 {
-	unsigned handle;
+	//unsigned handle;
+	GLuint handle;
 };
 
 Shader makeShader(const char *vsource, const char *fsource);

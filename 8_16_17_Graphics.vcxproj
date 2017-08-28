@@ -148,17 +148,25 @@
   <ItemGroup>
     <ClCompile Include="source\Context.cpp" />
     <ClCompile Include="source\draw.cpp" />
+    <ClCompile Include="source\load.cpp" />
     <ClCompile Include="source\RenderObjects.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics\Context.h" />
     <ClInclude Include="include\graphics\draw.h" />
+    <ClInclude Include="include\graphics\glinc.h" />
+    <ClInclude Include="include\graphics\load.h" />
     <ClInclude Include="include\graphics\RenderObjects.h" />
     <ClInclude Include="include\graphics\Vertex.h" />
-    <ClInclude Include="source\glinc.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="8_16_17_Graphics.VC.db" />
+    <None Include="resources\cube.frag" />
+    <None Include="resources\cube.vert" />
+    <None Include="resources\lambert.frag" />
+    <None Include="resources\lambert.vert" />
+    <None Include="resources\mvplite.frag" />
+    <None Include="resources\mvplite.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

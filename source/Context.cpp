@@ -1,5 +1,5 @@
 #include "..\include\graphics\Context.h"
-#include "glinc.h"
+#include "..\include\graphics\glinc.h"
 #include <iostream>
 using std::cout;
 
@@ -31,7 +31,7 @@ bool Context::init(size_t w, size_t h, const char * title)
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, 0, true);
 #endif
 
-	//printf("the version string is %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	printf("the version string is %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 	return true;
 }
@@ -52,10 +52,10 @@ bool Context::term()
 
 bool Context::getKey(int key)
 {
-	return true;// (glfwGetKey(handle, glfwGetKey) == );
+	return (glfwGetKey(handle, key));
 }
 
-bool Context::getMNouseButton(int button)
+bool Context::getMouseButton(int button)
 {
 	return false;
 }
