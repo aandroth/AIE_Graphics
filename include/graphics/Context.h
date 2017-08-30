@@ -20,7 +20,7 @@ public:
 	bool term();
 
 	bool getKey(int key);
-	bool getMouseButton(int button);
+	bool getMouseButtonLeft();
 	void getMousePosition(double &x_out, double &y_out);
 	double getTime();
 };

@@ -55,13 +55,14 @@ bool Context::getKey(int key)
 	return (glfwGetKey(handle, key));
 }
 
-bool Context::getMouseButton(int button)
+bool Context::getMouseButtonLeft()
 {
-	return false;
+	return (glfwGetMouseButton(handle, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS);
 }
 
 void Context::getMousePosition(double & x_out, double & y_out)
 {
+	glfwGetCursorPos(handle, &x_out, &y_out);
 }
 
 double Context::getTime()

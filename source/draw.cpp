@@ -28,6 +28,7 @@ void setUniform(const Shader & shader, int location, const Texture & value, unsi
 	glProgramUniform1i(shader.handle, location, slot);
 }
 
+
 void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, float val)
 {
 	glProgramUniform1f(s.handle, loc_io++, val);
@@ -54,6 +55,17 @@ void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const g
 void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val)
 {
 	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val));
+}
+
+void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val)
+{
+	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.getProjection()));
+	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.getView()));
+}
+
+void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Mesh &val)
+{
+	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.transform));
 }
 
 void clearFrameBuffer(const Framebuffer & fb, bool color, bool depth)

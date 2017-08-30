@@ -130,16 +130,24 @@ int main()
 	int loc = 0, tex = 0;
 	Framebuffer f = { 0, 800, 600 };
 
+	double xM_prev = 0, yM_prev = 0;
+	double xM_curr = 0, yM_curr = 0;
+
 	while (context.step())
 	{
 		
 
 		clearFrameBuffer(f);
 		loc = 0, tex = 0;
-		if(context.getKey('A'))
+		context.getMousePosition(xM_curr, yM_curr);
+
+		if(xM_curr != xM_prev || yM_curr != yM_prev)
 			setUniforms(s, loc, tex, (float)context.getTime(), t_magYel);
 		else
 			setUniforms(s, loc, tex, 0.0f, t_magYel);
+
+		xM_prev = xM_curr;
+		yM_prev = yM_curr;
 		s0_draw(f, s, g);
 	}
 
