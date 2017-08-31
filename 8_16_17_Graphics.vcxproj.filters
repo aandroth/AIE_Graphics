@@ -77,5 +77,11 @@
     <None Include="resources\mvplite.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="standard.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="standard.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

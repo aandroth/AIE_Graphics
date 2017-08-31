@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8_16_17_Graphics", "8_16_17_Graphics.vcxproj", "{45DD2807-EE66-47DB-B8C7-93A1C5C85F12}"
 EndProject
@@ -36,6 +36,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06-Lights", "tests\06-Light
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00-4.3-UniTex", "tests\00-4.3-UniTex\00-4.3-UniTex.vcxproj", "{AAC99331-4C47-4CBE-998E-800A1008FA0B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07-Materials", "07-Materials\07-Materials.vcxproj", "{3BB95410-C012-41DF-ADBD-EB80250AF442}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,16 @@ Global
 		{AAC99331-4C47-4CBE-998E-800A1008FA0B}.Release|x64.Build.0 = Release|x64
 		{AAC99331-4C47-4CBE-998E-800A1008FA0B}.Release|x86.ActiveCfg = Release|Win32
 		{AAC99331-4C47-4CBE-998E-800A1008FA0B}.Release|x86.Build.0 = Release|Win32
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Debug|x64.ActiveCfg = Debug|x64
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Debug|x64.Build.0 = Debug|x64
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Debug|x86.ActiveCfg = Debug|Win32
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Debug|x86.Build.0 = Debug|Win32
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Release|Any CPU.ActiveCfg = Release|Win32
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Release|x64.ActiveCfg = Release|x64
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Release|x64.Build.0 = Release|x64
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Release|x86.ActiveCfg = Release|Win32
+		{3BB95410-C012-41DF-ADBD-EB80250AF442}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

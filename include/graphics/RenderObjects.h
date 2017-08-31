@@ -3,6 +3,7 @@
 #include "glinc.h"
 #include "glm\geometric.hpp"
 #include "glm\glm.hpp"
+#include "glm\ext.hpp"
 #include "glm\gtc\type_ptr.hpp"
 
 struct Vertex;
@@ -11,6 +12,9 @@ struct Geometry
 {
 	unsigned handle, vbo, ibo, size;
 };
+
+void SolveTangents(Vertex *v, size_t vsize,
+	const unsigned *indices, size_t isize);
 
 Geometry MakeGeometry(const Vertex *vertices, size_t vsize,
 	const unsigned *indices, size_t isize);
@@ -45,11 +49,26 @@ struct Transform
 {
 	glm::vec3 position;
 	glm::vec3 scale;
-	glm::vec3 rotation;
+	glm::vec3 rotation; // rotation is one of 3 possibilities-- vec3 of euler angles, quaternion, or a mat3 of rotation directions
+
+	glm::vec3 fwd, rt;
 
 	Transform* parent = nullptr;
 
-	glm::mat4 getLocal() const;
+	glm::mat4 getLocal() const
+	{
+		glm::mat4 Local;// = glm::mat4{ glm::vec4(1, 0, 0, 0), glm::vec4(0, 1, 0, 0), glm::vec4(0, 0, 1, 0), glm::vec4(0, 0, 0, 1) };
+	
+		//Local = Local * glm::vec4(position, 1) * glm::rotate(vec4(rotation, 0)) * glm::vec4(scale, 0);
+
+		glm::vec3 up = glm::cross(fwd, rt);
+
+		glm::mat4(glm::vec4(rt, 0), glm::vec4(up, 0), glm::vec4(fwd, 0), glm::vec4(0, 0, 0, 1));
+		
+		Local = glm::translate(position) * glm::yawPitchRoll(rotation.y, rotation.x, rotation.z) * glm::scale(scale);
+		 
+		return Local;
+	}
 	glm::mat4 getGlobal() const;
 
 	void axisAngle(float angle, const glm::vec3 &axis = { 0, 1, 0 });
@@ -70,7 +89,9 @@ struct FlyCamera
 {
 	Camera camera;
 
-	float ..                                                                                           
+	float speed;
+
+	void update(float dt);
 };
 
 struct OrbitCamera
