@@ -29,6 +29,8 @@ int main()
 
 	unsigned idxs[6] = { 0, 1, 2, 0, 3, 2 };
 
+
+
 	Geometry g = MakeGeometry(verts, 4,
 		idxs, (6));
 
@@ -38,24 +40,35 @@ int main()
 
 	Texture wall_normal = loadTexture("../../resources/carving.jpg");
 	Texture wall_diffuse = loadTexture("../../resources/duck.jpg");
+	float ss_gloss = 4.0f;
 
 	Shader standard = loadShader("../../resources/shaders/standard.vert",
 								 "../../resources/shaders/standard.frag");
 
-	Framebuffer screen = { 0, 800, 600 };
+	myFramebuffer screen = { 0, 800, 600 };
 
 	// Camera
-	glm::vec4 cam_view = glm::lookAt(glm::vec3(0, 3, -4),
+	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 3, -4),
 									glm::vec3(0, 0, 0),
 									glm::vec3(0, 1, 0));
 
-	glm::vec4 cam_proj = glm::perspective(45.f, 800.f / 600.f, .01f, 100.f);
+	glm::mat4 cam_proj = glm::perspective(45.f, 800.f / 600.f, .01f, 100.f);
 
 	// Model
 	glm::mat4 go_model;
 
 	// Light
 	glm::vec3 light_direction = glm::normalize(glm::vec3(1, -1, 1));
+	glm::vec4 l_color         = glm::vec4(.7f, .6f, .9f, 1);
+	float     l_intensity     = 1.f;
+	glm::vec4 l_ambient       = glm::vec4(.2f, .2f, .01f, 1);
+	int       l_type          = 0;
+
+	myFramebuffer fBuffer = makeFrameBuffer(1280, 720, 4, true, 3, 1);
+	Shader fsq_shader = loadShader("../../resources/shaders/quad.vert",
+								   "../../resources/shaders/quad.frag");
+
+	//Geometry ss_geo = 
 
 	while (context.step())
 	{
@@ -64,17 +77,26 @@ int main()
 		//glm::mat4 model = glm::rotate(time, glm::vec3(0, 1, 0));
 		go_model = glm::rotate(time, glm::vec3(0, 1, 0)) * glm::rotate(glm::radians(90.f), glm::vec3(-1, 0, 0)) * glm::scale(glm::vec3(2, 2, 1));
 
+		//////////////////////////////////////////////////
+		// Frame Buffer Pass
+		//clearFrameBuffer(fBuffer);
+		//setFlags(RenderFlag::DEPTH);
+
+		//int loc = 0, slot = 0;
+
+		//setUniforms(standard, loc, slot,
+		//	cam_proj, cam_view,
+		//	go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	l_dir, l_color, l_intensity, l_ambient, l_type);				// light data
+
+		//s0_draw(fBuffer, standard, g);
+
+		////////////////////////////////////////////////
+		//  Screen pass
 		clearFrameBuffer(screen);
-		setFlags(RenderFlag::DEPTH);
-
-		int loc = 0, slot = 0;
-
-		setUniforms(standard, loc, slot,
-			cam_proj, cam_view,
-			go_model, wall_normal, wall_diffuse,
-			light_direction);
-
-		s0_draw(screen, standard, g);
+		loc = 0; slot = 0;
+		setUniforms(fsq_shader, loc, slot, fBuffer.targets[0]);
+			s0_draw(screen, fsq_shader, ss_geo);
 	}
 
 	context.term();

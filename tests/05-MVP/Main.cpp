@@ -17,7 +17,7 @@ int main()
 	Shader s = loadShader("../../resources/mvplite.vert", "../../resources/mvplite.frag");
 
 	int loc = 0, tex = 0;
-	Framebuffer f = { 0, 800, 600 };
+	myFramebuffer f = { 0, 800, 600 };
 	float speed = 1;
 
 	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 3, -4), glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));

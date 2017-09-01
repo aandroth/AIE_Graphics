@@ -29,7 +29,7 @@ Texture loadTexture(const char *path)
 	unsigned char *pixels;
 	pixels = stbi_load(path, &w, &h, &c, STBI_default);
 
-	retval = makeTexture(w, h, c, pixels);
+	retval = makeTexture(w, h, c, pixels, false);
 	stbi_image_free(pixels);
 
 	return retval;

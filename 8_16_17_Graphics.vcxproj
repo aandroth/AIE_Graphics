@@ -167,8 +167,10 @@
     <None Include="resources\lambert.vert" />
     <None Include="resources\mvplite.frag" />
     <None Include="resources\mvplite.vert" />
-    <None Include="standard.frag" />
-    <None Include="standard.vert" />
+    <None Include="resources\quad.frag" />
+    <None Include="resources\quad.vert" />
+    <None Include="resources\standard.frag" />
+    <None Include="resources\standard.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

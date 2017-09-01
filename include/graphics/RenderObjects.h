@@ -5,6 +5,7 @@
 #include "glm\glm.hpp"
 #include "glm\ext.hpp"
 #include "glm\gtc\type_ptr.hpp"
+#include "glm\gtx\matrix_interpolation.hpp"
 
 struct Vertex;
 
@@ -30,20 +31,28 @@ struct Shader
 Shader makeShader(const char *vsource, const char *fsource);
 void freeShader(Shader &s);
 
-struct Framebuffer
-{
-	unsigned handle;
-	unsigned width, height;
-};
-
 struct Texture
 {
 	unsigned handle;
 };
 
-Texture makeTexture(unsigned w, unsigned h, unsigned c, const unsigned char *pixels);
+struct myFramebuffer
+{
+	unsigned handle, nTargets;
+	unsigned width, height;
+	Texture targets[8];
+	Texture depthTarget;
+};
+
+myFramebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets);
+
+
+// RGBA = 4 channels
+// 512x512 image = 262144 pizels * 4 channels = ~1million
+Texture makeTexture(unsigned w, unsigned h, unsigned c, const void *pixels, bool isFloat);
 
 void freeTexture(Texture &t);
+
 
 struct Transform
 {
@@ -58,8 +67,6 @@ struct Transform
 	glm::mat4 getLocal() const
 	{
 		glm::mat4 Local;// = glm::mat4{ glm::vec4(1, 0, 0, 0), glm::vec4(0, 1, 0, 0), glm::vec4(0, 0, 1, 0), glm::vec4(0, 0, 0, 1) };
-	
-		//Local = Local * glm::vec4(position, 1) * glm::rotate(vec4(rotation, 0)) * glm::vec4(scale, 0);
 
 		glm::vec3 up = glm::cross(fwd, rt);
 
@@ -69,10 +76,22 @@ struct Transform
 		 
 		return Local;
 	}
-	glm::mat4 getGlobal() const;
+	glm::mat4 getGlobal() const
+	{
+		if (parent == nullptr)
+			return getLocal();
 
-	void axisAngle(float angle, const glm::vec3 &axis = { 0, 1, 0 });
-	void lookAt(const glm::vec3 &target, const glm::vec3 &up = { 0, 1, 0 });
+		return parent->getGlobal() * getLocal();
+	}
+
+	//void axisAngle(float angle, const glm::vec3 &axis = { 0, 1, 0 })
+	//{
+	//	
+	//}
+	//void lookAt(const glm::vec3 &target, const glm::vec3 &up = { 0, 1, 0 })
+	//{
+	//	rotation = target - position;
+	//}
 };
 
 struct Camera

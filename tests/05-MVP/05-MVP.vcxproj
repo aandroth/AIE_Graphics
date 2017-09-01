@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{86F219FB-5B29-464C-940E-20947F14E3D1}</ProjectGuid>
+    <ProjectGuid>{A3D447AA-F71A-4E9F-91D1-5014D8EF0A7F}</ProjectGuid>
     <RootNamespace>My05MVP</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>

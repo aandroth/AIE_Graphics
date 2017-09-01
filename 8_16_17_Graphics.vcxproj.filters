@@ -77,10 +77,16 @@
     <None Include="resources\mvplite.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="standard.vert">
+    <None Include="resources\standard.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="standard.frag">
+    <None Include="resources\standard.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\quad.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\quad.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
