@@ -1,6 +1,6 @@
 #include "..\include\graphics\draw.h"
 
-void s0_draw(const myFramebuffer & f, const Shader & s, const Geometry & g)
+void s0_draw(const Framebuffer & f, const Shader & s, const Geometry & g)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, f.handle);
 	glUseProgram(s.handle);
@@ -57,18 +57,18 @@ void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const g
 	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val));
 }
 
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val)
-{
-	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.getProjection()));
-	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.getView()));
-}
+//void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val)
+//{
+//	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.getProjection()));
+//	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.getView()));
+//}
+//
+//void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Mesh &val)
+//{
+//	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.transform.getGlobal()));
+//}
 
-void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Mesh &val)
-{
-	glProgramUniformMatrix4fv(s.handle, loc_io++, 1, 0, glm::value_ptr(val.transform.getGlobal()));
-}
-
-void clearFrameBuffer(const myFramebuffer & fb, bool color, bool depth)
+void clearFrameBuffer(const Framebuffer & fb, bool color, bool depth)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, fb.handle);
 	glClear(GL_COLOR_BUFFER_BIT*color | GL_DEPTH_BUFFER_BIT*depth);

@@ -2,9 +2,13 @@
 
 #include "RenderObjects.h"
 
-void s0_draw(const myFramebuffer &f, const Shader &s, const Geometry &g);
+struct Geometry;
+struct Framebuffer;
+struct Shader;
 
-void clearFrameBuffer(const myFramebuffer & fb, bool color = true, bool depth = true);
+void s0_draw(const Framebuffer &f, const Shader &s, const Geometry &g);
+
+void clearFrameBuffer(const Framebuffer & fb , bool color = true, bool depth = true);
 
 enum RenderFlag {DEPTH = 1};
 void setFlags(int flags);
@@ -21,8 +25,8 @@ namespace __internal
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val);
 	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val);
-	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val);
-	void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Mesh &val);
+	//void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Camera &val);
+	//void t_setUniform(const Shader &s, int &loc_io, int &tex_io, const Mesh &val);
 }
 
 template<typename T, typename ...U>
@@ -39,4 +43,4 @@ void setUniforms(const Shader &s, int &loc_io, int &tex_io, const T &val)
 }
 
 
-void clearFrameBuffer(const myFramebuffer & fb, bool color, bool depth);
+void clearFrameBuffer(const Framebuffer & fb, bool color, bool depth);

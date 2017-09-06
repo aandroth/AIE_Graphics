@@ -9,8 +9,8 @@ layout(location = 3) uniform sampler2D diffuse;
 
 void main()
 {
-	//vec3 L = normalize(vec3(0, -1, 0)); // Light direction
-	//vec3 N = vNormal.xyz;
+	vec3 L = normalize(vec3(0, -1, 0)); // Light direction
+	vec3 N = vNormal.xyz;
 
 	// Diffuse lighting
 	// Consider the interaction with a polygon normal and the opposite vector of the light
@@ -18,9 +18,10 @@ void main()
 	// dot(<0, 1>, <0, -1>) = -1; opposite, casts a shadow lit polygon
 	// dot(<1, 0>, <0,  1>) =  0, perpendicular, no lighting or shadow
 	// The smaller the angle, the less bright the polygon is
-	//float lamb = dot(N, -L);
+	float lamb = dot(N, -L);
 
-	outColor = texture(diffuse, vUV);
-
-	//outColor = vNormal; // turns our model's colors into the normals, just to see them
+	//outColor = texture(diffuse, vUV);
+	//outColor = lamb * texture(diffuse, vUV);
+	//outColor = vec4(0, 1, 1, 1);
+	outColor = normalize(-vNormal); // turns our model's colors into the normals, just to see them
 }

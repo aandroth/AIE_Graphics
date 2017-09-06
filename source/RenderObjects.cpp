@@ -14,31 +14,30 @@ glm::vec4 CalcTangent(const Vertex &v0, const Vertex &v1, const Vertex &v2)
 	glm::vec4 p2 = v2.position - v0.position;
 
 	glm::vec2 t1 = v1.texCoord - v0.texCoord;
-	glm::vec2 t2 = v1.texCoord - v0.texCoord;
+	glm::vec2 t2 = v2.texCoord - v0.texCoord;
 
 	return glm::normalize((p1*t2.y - p2*t1.y) / (t1.x*t2.y - t1.y*t2.x));
 	// UV.x will follow the tangent
 	// UV.y will follow the bitangent
 }
 
-void SolveTangents(Vertex *v, size_t vsize,
+void SolveTangents(Vertex *vertices, size_t vsize,
 	const unsigned *idxs, size_t isize)
 {
-	int jj = 0;
-	for (int ii = 0; ii < vsize; ii+=3)
+	for (int ii = 0; ii+2 < isize; ii+=3)
 	{
-		glm::vec4 T = CalcTangent(v[idxs[ii]], v[idxs[ii+1]], v[idxs[ii+2]]);
+		glm::vec4 T = CalcTangent(vertices[idxs[ii]], vertices[idxs[ii+1]], vertices[idxs[ii+2]]);
 
-		for (int jj = 0; jj < vsize; ++jj)
+		for (int jj = 0; jj < 3; ++jj)
 		{
-			v[idxs[ii + jj]].tangent = glm::normalize(T + v[idxs[ii + jj]].tangent);
+			vertices[idxs[ii + jj]].tangent = glm::normalize(T + vertices[idxs[ii + jj]].tangent);
 		}
 	}
 
 	// Get the bitangent
 	for (int ii = 0; ii < vsize; ++ii)
 	{
-		v[ii].bitangent = glm::vec4(glm::cross(v[ii].tangent.xyz(), v[ii].normal.xyz()), 0);
+		vertices[ii].bitangent = glm::vec4(glm::cross(vertices[ii].tangent.xyz(), vertices[ii].normal.xyz()), 0);
 	}
 }
 
@@ -200,9 +199,9 @@ void freeTexture(Texture & t)
 	t = { 0 };
 }
 
-myFramebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets)
+Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets)
 {
-	myFramebuffer retval = { 0, w, h, nTargets + nFloatTargets, 0,{ 0 } };
+	Framebuffer retval = { 0, w, h, nTargets + nFloatTargets, 0,{ 0 } };
 
 	glGenFramebuffers(1, &retval.handle);
 	glBindFramebuffer(GL_FRAMEBUFFER, retval.handle);

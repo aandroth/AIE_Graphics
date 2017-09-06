@@ -36,16 +36,14 @@ struct Texture
 	unsigned handle;
 };
 
-struct myFramebuffer
+struct Framebuffer
 {
-	unsigned handle, nTargets;
-	unsigned width, height;
+	unsigned handle, width, height, nTargets;
 	Texture targets[8];
 	Texture depthTarget;
 };
 
-myFramebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets);
-
+Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets);
 
 // RGBA = 4 channels
 // 512x512 image = 262144 pizels * 4 channels = ~1million
@@ -100,8 +98,8 @@ struct Camera
 
 	float fov = 45.f, aspect = 8.f / 6.f, near = 0.01f, far = 100.f;
 
-	glm::mat4 getProjection() const;
-	glm::mat4 getView() const;
+	//glm::mat4 getProjection() const;
+	//glm::mat4 getView() const;
 };
 
 struct FlyCamera
@@ -110,7 +108,7 @@ struct FlyCamera
 
 	float speed;
 
-	void update(float dt);
+	//void update(float dt);
 };
 
 struct OrbitCamera
@@ -121,7 +119,7 @@ struct OrbitCamera
 
 	glm::vec3 target;
 
-	void update(float dt);
+	//void update(float dt);
 };
 
 struct Mesh

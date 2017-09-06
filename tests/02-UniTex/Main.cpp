@@ -68,8 +68,8 @@ int main()
 	unsigned char pixels[] = { 255, 0, 255,
 		255, 255, 0 };
 
-	Texture t_magYel = makeTexture(7, 1, 3, pixels);
-	Texture t_mask = makeTexture(20, 1, 1, pixels);
+	Texture t_magYel = makeTexture(7, 1, 3, pixels, true);
+	Texture t_mask = makeTexture(20, 1, 1, pixels, false);
 
 	const char *vsource = "#version 430\n"
 		"layout(location = 0) in vec4 position; \n"

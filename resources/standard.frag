@@ -33,7 +33,7 @@ layout(location = 3) out vec4 outNormal;
 	//surface normal and light direction
 float calc_lambert(vec3 N, vec3 L);
 	//surface normal, light direction, direction to eye, and specular power
-float calc_phjong(vec3 N, vec3 L, vec3 V);
+float calc_phong(vec3 N, vec3 L, vec3 V);
 
 // PHONG
 // AMBIENT
