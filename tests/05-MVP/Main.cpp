@@ -22,7 +22,6 @@ int main()
 
 	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 3, -4), glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
 	glm::mat4 cam_proj = glm::perspective(1.f, 800.f/600.f, 0.01f, 100.f);
-	//glm::mat4 go_model(1.0); //identity matrix
 	glm::mat4 go_model(1.0); //identity matrix
 	//go_model[2][2] = 20;
 	//go_model *= glm::mat4(glm::vec4(0.5, 0.5, 0.5, 1), glm::vec4(0.5, 0.5, 4, 1), glm::vec4(0.5, 0.5, 0.5, 1), glm::vec4(0.5, 0.5, 0.5, 1));

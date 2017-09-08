@@ -29,8 +29,6 @@ int main()
 
 	unsigned idxs[6] = { 0, 1, 2, 0, 3, 2 };
 
-
-
 	Geometry g = MakeGeometry(verts, 4,
 		idxs, (6));
 
@@ -45,7 +43,7 @@ int main()
 	Shader standard = loadShader("../../resources/shaders/standard.vert",
 								 "../../resources/shaders/standard.frag");
 
-	myFramebuffer screen = { 0, 800, 600 };
+	Framebuffer screen = { 0, 800, 600 };
 
 	// Camera
 	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 3, -4),
@@ -64,7 +62,7 @@ int main()
 	glm::vec4 l_ambient       = glm::vec4(.2f, .2f, .01f, 1);
 	int       l_type          = 0;
 
-	myFramebuffer fBuffer = makeFrameBuffer(1280, 720, 4, true, 3, 1);
+	Framebuffer fBuffer = makeFrameBuffer(1280, 720, 4, true, 3, 1);
 	Shader fsq_shader = loadShader("../../resources/shaders/quad.vert",
 								   "../../resources/shaders/quad.frag");
 

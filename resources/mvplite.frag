@@ -9,7 +9,7 @@ layout(location = 3) uniform sampler2D diffuse;
 
 void main()
 {
-	vec3 L = normalize(vec3(0, -1, 0)); // Light direction
+	vec3 L = normalize(vec3(1, -1, 1)); // Light direction
 	vec3 N = vNormal.xyz;
 
 	// Diffuse lighting
@@ -21,7 +21,7 @@ void main()
 	float lamb = dot(N, -L);
 
 	//outColor = texture(diffuse, vUV);
-	//outColor = lamb * texture(diffuse, vUV);
+	outColor = lamb * texture(diffuse, vUV) * 5;
 	//outColor = vec4(0, 1, 1, 1);
-	outColor = normalize(-vNormal); // turns our model's colors into the normals, just to see them
+	//outColor = normalize(-vNormal); // turns our model's colors into the normals, just to see them
 }

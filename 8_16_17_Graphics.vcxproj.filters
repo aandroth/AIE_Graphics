@@ -36,6 +36,9 @@
     <ClCompile Include="source\load.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameObjects.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics\Vertex.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="include\graphics\glinc.h">
       <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\GameObjects.h">
+      <Filter>include\graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +93,36 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\quad.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shadow.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shadow.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\cpass.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\cpass.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\gpass.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\gpass.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\lpassD.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\lpassD.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\direct.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\direct.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
