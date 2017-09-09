@@ -30,55 +30,62 @@ int main()
 	Texture diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");
 
 	// Light
-	glm::vec3 light_dir = glm::normalize(glm::vec3(1, -1, 1));
+	glm::vec3 light_dir = glm::normalize(glm::vec3(1, -1, -1));
 	glm::mat4 light_proj = glm::ortho<float>(-10, 10, -10, 10, -10, 10);
 	glm::mat4 light_view = glm::lookAt(-light_dir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	// Shaders
-	//Shader shdr_shadow = loadShader("../../resources/shaders/shadow.vert", "../../resources/shaders/shadow.frag");
-	Shader shdr_shadow = loadShader("../../resources/mvplite.vert", "../../resources/mvplite.frag");
-	//Shader shdr_direct = loadShader("../../resources/shaders/direct.vert", "../../resources/shaders/direct.frag");
+	Shader shdr_shadow = loadShader("../../resources/shadow.vert", "../../resources/shadow.frag");
+	Shader shdr_direct = loadShader("../../resources/direct.vert", "../../resources/direct.frag");
 	// Buffers
 	Framebuffer fb_shadow = makeFrameBuffer(2048, 2048, 0, true, 0, 0);
 	Framebuffer screen = { 0, 1280, 720 };
-	Framebuffer f = { 0, 800, 600 };
 
 	int loc = 0, tex = 0;
 
 	glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 2, 5), glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
 	glm::mat4 cam_proj = glm::perspective(45.f, 1280.f / 720.f, 1.f, 10.f);
 	glm::mat4 go_model; //identity matrix
-	//glm::mat4 cam_view = glm::lookAt(glm::vec3(0, 3, -4), glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
-	//glm::mat4 cam_proj = glm::perspective(1.f, 800.f / 600.f, 0.01f, 100.f);
-	//glm::mat4 go_model(1.0); //identity matrix
 
 	while (context.step())
 	{
 		// Shadow Pass
-		//clearFrameBuffer(fb_shadow, false, true);
-		clearFrameBuffer(screen);
+		clearFrameBuffer(fb_shadow, false, true);
 		setFlags(RenderFlag::DEPTH);
 
+		float timeVal = (float)context.getTime();
+		float speed = 1;
+		glm::mat4 rotMat = glm::rotate(timeVal * speed, glm::vec3(0, 1, 0));
+
 		loc = tex = 0;
-		//setUniforms(shdr_shadow, loc, tex, cam_proj, cam_view, go_model, diffuse, light_dir, glm::vec4(1.f, 1.f, 1.f, 1.f));
-		setUniforms(shdr_shadow, loc, tex, cam_proj, cam_view, go_model, diffuse);
-		//s0_draw(screen, shdr_shadow, geo_spear);
-		s0_draw(screen, shdr_shadow, geo_spear);
+		setUniforms(shdr_shadow, loc, tex, light_proj, light_view, model_floor);// , diffuse, light_dir, glm::vec4(1.f, 1.f, 1.f, 1.f));
+		s0_draw(fb_shadow, shdr_shadow, geo_floor);
+
 		loc = tex = 0;
-		
-		s0_draw(screen, shdr_shadow, geo_floor);
+		setUniforms(shdr_shadow, loc, tex, light_proj, light_view, model_spear);// , diffuse, light_dir, glm::vec4(1.f, 1.f, 1.f, 1.f));
+		s0_draw(fb_shadow, shdr_shadow, geo_spear);
 
 		// Light Pass		
-		//setFlags(RenderFlag::DEPTH);
-		//clearFrameBuffer(screen);
+		setFlags(RenderFlag::DEPTH);
+		clearFrameBuffer(screen);
 
-		//loc = tex = 0;
-		//setUniforms(shdr_direct, loc, tex,
-		//	cam_proj, cam_view,     // Camera Data
-		//	model_floor,            // Geometry Data
-		//	light_proj, light_view, // Light Data
-		//	fb_shadow.depthTarget); // Shadow Map
-		//s0_draw(screen, shdr_direct, geo_floor);
+		loc = tex = 0;
+		setUniforms(shdr_direct, loc, tex,
+			cam_proj, cam_view,               // Camera Data
+			model_floor,                      // Geometry Data
+			light_proj, light_view, light_dir,// Light Data
+			fb_shadow.depthTarget,            // Shadow Map
+			diffuse);				          // Texture
+		s0_draw(screen, shdr_direct, geo_floor);
+
+		loc = tex = 0;
+		setUniforms(shdr_direct, loc, tex,
+			cam_proj, cam_view,               // Camera Data
+			rotMat * model_spear,                      // Geometry Data
+			light_proj, light_view, light_dir,// Light Data
+			fb_shadow.depthTarget,            // Shadow Map
+			diffuse);				          // Texture
+		s0_draw(screen, shdr_direct, geo_spear);
 	}
 
 	freeGeometry(geo_floor);

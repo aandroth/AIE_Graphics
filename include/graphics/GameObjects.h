@@ -1,5 +1,7 @@
 #pragma once
 #include "RenderObjects.h"
+#include "Vertex.h"
+# define M_PI           3.14159265358979323846
 
 struct SpecGloss
 {
@@ -43,3 +45,5 @@ namespace __internal
 {
 	void t_setUniform(const Shader &s, int &loc);
 }
+
+Geometry MakeNGon(int sideCount);

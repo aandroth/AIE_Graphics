@@ -37,7 +37,9 @@ int main()
 
 		loc = 0, tex = 0;
 		//setUniforms(s, loc, tex, cam_proj, cam_view, go_model * rotMat, diffuse);
-		setUniforms(s, loc, tex, cam_proj, cam_view, rotMat * go_model, diffuse);
+		setUniforms(s, loc, tex, 
+			cam_proj, cam_view, rotMat * go_model, 
+			diffuse);
 		s0_draw(f, s, spear);
 	}
 

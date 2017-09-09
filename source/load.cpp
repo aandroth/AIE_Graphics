@@ -92,7 +92,8 @@ std::string readFile(const char *path)
 
 	if (!ifStream.is_open())
 	{
-		std::cerr << "Could not read the file. Either the file is unreadable or does not exist.\n";
+		std::string p = path;
+		std::cerr << "Could not read the file at "+ p +". Either the file is unreadable or does not exist.\n";
 		return "";
 	}
 

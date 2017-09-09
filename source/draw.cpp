@@ -46,11 +46,11 @@ void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const T
 }
 void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec3 &val)
 {
-	glProgramUniform3fv(s.handle, loc_io++, 3, glm::value_ptr(val));
+	glProgramUniform3fv(s.handle, loc_io++, 1, glm::value_ptr(val));
 }
 void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::vec4 &val)
 {
-	glProgramUniform4fv(s.handle, loc_io++, 4, glm::value_ptr(val));
+	glProgramUniform4fv(s.handle, loc_io++, 1, glm::value_ptr(val));
 }
 void __internal::t_setUniform(const Shader &s, int &loc_io, int &tex_io, const glm::mat4 &val)
 {

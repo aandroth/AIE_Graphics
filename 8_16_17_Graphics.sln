@@ -43,6 +43,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05-MVP", "tests\05-MVP\05-M
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09-Shadows", "tests\09-Shadows\09-Shadows.vcxproj", "{B0988C44-C199-4B1A-B550-DAB6C2CB63CE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45DD2807-EE66-47DB-B8C7-93A1C5C85F12} = {45DD2807-EE66-47DB-B8C7-93A1C5C85F12}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10-Deferred", "tests\10-Deferred\10-Deferred.vcxproj", "{744E142E-A264-4A33-B4C8-4B6389A5738E}"
 EndProject
