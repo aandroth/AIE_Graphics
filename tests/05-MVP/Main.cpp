@@ -14,7 +14,7 @@ int main()
 
 	Geometry spear = loadGeometry("../../resources/models/soulspear.obj");
 	Texture diffuse = loadTexture("../../resources/textures/soulspear_diffuse.tga");
-	Shader s = loadShader("../../resources/mvplite.vert", "../../resources/mvplite.frag");
+	Shader s = loadShader("../../resources/shaders/mvplite.vert", "../../resources/shaders/mvplite.frag");
 
 	int loc = 0, tex = 0;
 	Framebuffer f = { 0, 800, 600 };

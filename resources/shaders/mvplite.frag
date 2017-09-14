@@ -18,7 +18,7 @@ void main()
 	// dot(<0, 1>, <0, -1>) = -1; opposite, casts a shadow lit polygon
 	// dot(<1, 0>, <0,  1>) =  0, perpendicular, no lighting or shadow
 	// The smaller the angle, the less bright the polygon is
-	float lamb = dot(N, -L);
+	float lamb = max(dot(N, -L), 0);
 
 	//outColor = texture(diffuse, vUV);
 	outColor = lamb * texture(diffuse, vUV) * 5;

@@ -65,64 +65,70 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="8_16_17_Graphics.VC.db" />
-    <None Include="resources\cube.frag">
+    <None Include="resources\shaders\cpass.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\cube.vert">
+    <None Include="resources\shaders\cpass.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\lambert.frag">
+    <None Include="resources\shaders\cube.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\lambert.vert">
+    <None Include="resources\shaders\cube.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\mvplite.frag">
+    <None Include="resources\shaders\direct.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\mvplite.vert">
+    <None Include="resources\shaders\direct.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\standard.frag">
+    <None Include="resources\shaders\gpass.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\standard.vert">
+    <None Include="resources\shaders\gpass.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\quad.frag">
+    <None Include="resources\shaders\lambert.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\quad.vert">
+    <None Include="resources\shaders\lambert.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\shadow.frag">
+    <None Include="resources\shaders\lpassD.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\shadow.vert">
+    <None Include="resources\shaders\lpassD.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\cpass.frag">
+    <None Include="resources\shaders\mvplite.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\cpass.vert">
+    <None Include="resources\shaders\mvplite.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\gpass.vert">
+    <None Include="resources\shaders\quad.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\gpass.frag">
+    <None Include="resources\shaders\quad.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\lpassD.frag">
+    <None Include="resources\shaders\shadow.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\lpassD.vert">
+    <None Include="resources\shaders\shadow.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\direct.vert">
+    <None Include="resources\shaders\standard.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\direct.frag">
+    <None Include="resources\shaders\standard.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\mvp_mat.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\mvp_mat.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

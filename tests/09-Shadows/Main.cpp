@@ -35,8 +35,8 @@ int main()
 	glm::mat4 light_view = glm::lookAt(-light_dir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	// Shaders
-	Shader shdr_shadow = loadShader("../../resources/shadow.vert", "../../resources/shadow.frag");
-	Shader shdr_direct = loadShader("../../resources/direct.vert", "../../resources/direct.frag");
+	Shader shdr_shadow = loadShader("../../resources/shadow.vert", "../../resources/shaders/shadow.frag");
+	Shader shdr_direct = loadShader("../../resources/direct.vert", "../../resources/shaders/direct.frag");
 	// Buffers
 	Framebuffer fb_shadow = makeFrameBuffer(2048, 2048, 0, true, 0, 0);
 	Framebuffer screen = { 0, 1280, 720 };

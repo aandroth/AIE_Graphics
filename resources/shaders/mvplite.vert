@@ -17,6 +17,6 @@ void main()
 	gl_Position = proj * view * model * position;
 
 	vPos = model * position;
-	vNormal = (model * normal).xyz;
+	vNormal = model * normal;
 	vUV = texCoord;
 }

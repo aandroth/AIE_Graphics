@@ -7,15 +7,15 @@ in vec4 vNormal;
 
 layout(location = 3) uniform sampler2D diffuse;
 layout(location = 4) uniform vec3 lightDir;
-layout(location = 5) uniform vec3 lightCol;
+layout(location = 5) uniform vec4 lightCol;
 
 void main()
 {
 	vec4 surfaceCol = texture(diffuse, vUV);
 
-	float lambertFactor = max(dot(vNormal, -lightDir), 0); // Keep the result between 0 and 1
+	float lambertFactor = max(dot(vNormal.xyz, -lightDir), 0); // Keep the result between 0 and 1
 
-	vec4 lambertTerm = surfaceCol * lambertFactor * lightCol;
+	vec4 lambertTerm = (surfaceCol * lambertFactor) * lightCol;
 
 	//vec3 L = normalize(vec3(0, -1, 0)); // Light direction
 	//vec3 N = vNormal.xyz;

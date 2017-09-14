@@ -20,7 +20,7 @@ void main()
 	//vec4 texCoord0 = {texCoord.x,texCoord.y,1, 1};
 	//vec4 texCoord1 = {texCoord.x,texCoord.y,.5,1};
 	//vNormal = normalize(vec4(gl_Position.xyz,0));
-	gl_Position =  modelMat * pos * vec4(0.1, 0.1, 0.1, 1);
+	gl_Position =  modelMat * pos;// * vec4(0.1, 0.1, 0.1, 1);
 	vUV = texCoord;
 	//vCol = pos + texCoord1;
 }

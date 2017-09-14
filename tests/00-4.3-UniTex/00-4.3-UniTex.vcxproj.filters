@@ -15,11 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.vert">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </None>
-    <None Include="test.frag">
+    </ClCompile>
+    <ClCompile Include="opengl_cs.cpp">
       <Filter>Source Files</Filter>
-    </None>
+    </ClCompile>
   </ItemGroup>
 </Project>
