@@ -36,11 +36,11 @@ int main()
 		255, 255, 0 };
 
 	Texture wall_normal = loadTexture("../../resources/textures/carving.jpg");
-	Texture wall_diffuse = loadTexture("../../resources/textures/Blue.jpg");
+	Texture wall_diffuse = loadTexture("../../resources/textures/carving.jpg");
 	float ss_gloss = 4.0f;
 
-	Shader standard = loadShader("../../resources/shaders/mvp_mat.vert",
-								 "../../resources/shaders/mvp_mat.frag");
+	Shader standard = loadShader("../../resources/shaders/mvpmat.vert",
+								 "../../resources/shaders/mvpmat.frag");
 
 	Framebuffer screen = { 0, 800, 600 };
 

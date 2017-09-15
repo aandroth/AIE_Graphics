@@ -35,6 +35,11 @@ struct Texture
 {
 	unsigned handle;
 };
+// RGBA = 4 channels
+// 512x512 image = 262144 pizels * 4 channels = ~1million
+Texture makeTexture(unsigned w, unsigned h, unsigned c, const void *pixels, bool isFloat = false);
+
+void freeTexture(Texture &t);
 
 struct Framebuffer
 {
@@ -45,12 +50,16 @@ struct Framebuffer
 
 Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets);
 
-// RGBA = 4 channels
-// 512x512 image = 262144 pizels * 4 channels = ~1million
-Texture makeTexture(unsigned w, unsigned h, unsigned c, const void *pixels, bool isFloat);
+void freeFrameBuffer(Framebuffer &fb)
+{
+	for (unsigned ii = 0; ii < fb.nTargets; ++ii)
+	{
+		freeTexture(fb.targets[ii]);
+	}
 
-void freeTexture(Texture &t);
-
+	glDeleteFramebuffers(1, &fb.handle);
+	fb = {0, 0, 0, 0};
+}
 
 struct Transform
 {

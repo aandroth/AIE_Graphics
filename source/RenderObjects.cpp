@@ -175,9 +175,9 @@ Texture makeTexture(unsigned w, unsigned h, unsigned c, const void * pixels, boo
 	switch (c)
 	{
 	case 0: f = GL_DEPTH_COMPONENT; i = GL_DEPTH24_STENCIL8; break;
-	case 1: f = GL_RED; i = GL_R32F; break;
-	case 2: f = GL_RG; i = GL_RG32F; break;
-	case 3: f = GL_RGB; i = GL_RGB32F; break;
+	case 1: f = GL_RED;  i = GL_R32F;    break;
+	case 2: f = GL_RG;   i = GL_RG32F;   break;
+	case 3: f = GL_RGB;  i = GL_RGB32F;  break;
 	case 4: f = GL_RGBA; i = GL_RGBA32F; break;
 	}
 
@@ -201,7 +201,8 @@ void freeTexture(Texture & t)
 
 Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets)
 {
-	Framebuffer retval = { 0, w, h, nTargets + nFloatTargets, 0,{ 0 } };
+	Framebuffer retval = { 0, w, h, 0, 0,{ 0 } };
+	retval.nTargets = nTargets + nFloatTargets;
 
 	glGenFramebuffers(1, &retval.handle);
 	glBindFramebuffer(GL_FRAMEBUFFER, retval.handle);

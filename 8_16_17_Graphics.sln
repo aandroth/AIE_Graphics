@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8_16_17_Graphics", "8_16_17_Graphics.vcxproj", "{45DD2807-EE66-47DB-B8C7-93A1C5C85F12}"
 EndProject
@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03-Tdraw", "tests\03-Tdraw\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04-FromDisk", "tests\04-FromDisk\04-FromDisk.vcxproj", "{82D372E9-B14F-4AD8-86F1-004EB815F5C0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08-RenderTargets", "tests\08-RenderTargets\08-RenderTargets.vcxproj", "{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -154,6 +156,16 @@ Global
 		{82D372E9-B14F-4AD8-86F1-004EB815F5C0}.Release|x64.Build.0 = Release|x64
 		{82D372E9-B14F-4AD8-86F1-004EB815F5C0}.Release|x86.ActiveCfg = Release|Win32
 		{82D372E9-B14F-4AD8-86F1-004EB815F5C0}.Release|x86.Build.0 = Release|Win32
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Debug|x64.ActiveCfg = Debug|x64
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Debug|x64.Build.0 = Debug|x64
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Debug|x86.ActiveCfg = Debug|Win32
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Debug|x86.Build.0 = Debug|Win32
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Release|Any CPU.ActiveCfg = Release|Win32
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Release|x64.ActiveCfg = Release|x64
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Release|x64.Build.0 = Release|x64
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Release|x86.ActiveCfg = Release|Win32
+		{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
