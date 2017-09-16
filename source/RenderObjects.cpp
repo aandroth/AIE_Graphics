@@ -201,7 +201,7 @@ void freeTexture(Texture & t)
 
 Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, unsigned nTargets, unsigned nFloatTargets)
 {
-	Framebuffer retval = { 0, w, h, 0, 0,{ 0 } };
+	Framebuffer retval = { 0, w, h, {0},  { 0 } };
 	retval.nTargets = nTargets + nFloatTargets;
 
 	glGenFramebuffers(1, &retval.handle);
@@ -209,7 +209,7 @@ Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, u
 
 	if (hasDepth)
 	{
-		retval.depthTarget = makeTexture(w, h, 0, 0, 0);
+		retval.depthTarget = makeTexture(w, h, 0, 0);
 		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, retval.depthTarget.handle, 0);
 	}
 

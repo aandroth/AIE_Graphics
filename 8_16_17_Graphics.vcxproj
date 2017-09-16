@@ -175,6 +175,8 @@
     <None Include="resources\shaders\lambert.vert" />
     <None Include="resources\shaders\lpassD.frag" />
     <None Include="resources\shaders\lpassD.vert" />
+    <None Include="resources\shaders\mirror.frag" />
+    <None Include="resources\shaders\mirror.vert" />
     <None Include="resources\shaders\mvplite.frag" />
     <None Include="resources\shaders\mvplite.vert" />
     <None Include="resources\shaders\mvpmat.frag" />

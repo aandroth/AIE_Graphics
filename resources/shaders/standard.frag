@@ -18,7 +18,7 @@ layout(loction = 5) uniform sampler2D normalMap;
 layout(loction = 6) uniform sampler2D gloss;
 
 // Light Data
-layout(loction = 7) uniform vec3  l_data;
+layout(loction = 7) uniform vec3  l_data; // direction or location
 layout(loction = 8) uniform vec4  l_color;
 layout(loction = 9) uniform float l_intensity;
 layout(loction = 10) uniform vec4 l_ambient;

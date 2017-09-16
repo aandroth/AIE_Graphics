@@ -25,10 +25,10 @@ void main()
 	float lamb = max(dot(N, -L), 0);
 
 	//outColor = vec4(0, 1, 1, 1);
-	if(vPos[0].x < cutoff)
+	//if(vPos[0].x < cutoff)
 		outColor = texture(diffuse, vUV);
-	else
-		outColor = lamb * texture(diffuse, vUV);
+	//else
+	//	outColor = lamb * texture(diffuse, vUV);
 	//outColor = normalize(-vNormal); // turns our model's colors into the normals, just to see them
 	//outColor = vec4(0, 1, 1, 1);
 }

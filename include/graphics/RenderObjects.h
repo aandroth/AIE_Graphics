@@ -138,3 +138,12 @@ struct Mesh
 	Geometry geometry;
 };
 
+glm::vec3 projection(const glm::vec3 &norm, const glm::vec3 &v)
+{
+	return dot(v, glm::normalize(norm)) * glm::normalize(norm);
+}
+
+glm::vec3 reflection(const glm::vec3 &norm, const glm::vec3 &v)
+{
+	return v - 2 * projection(norm, v);
+}

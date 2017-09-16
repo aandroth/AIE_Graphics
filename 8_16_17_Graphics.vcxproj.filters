@@ -137,5 +137,11 @@
     <None Include="resources\shaders\mvpmat.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\shaders\mirror.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\mirror.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
