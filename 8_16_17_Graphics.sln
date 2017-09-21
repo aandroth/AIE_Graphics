@@ -45,6 +45,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04-FromDisk", "tests\04-FromDisk\04-FromDisk.vcxproj", "{82D372E9-B14F-4AD8-86F1-004EB815F5C0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08-RenderTargets", "tests\08-RenderTargets\08-RenderTargets.vcxproj", "{9A3CB4EB-24F5-4EAC-AD17-DAB153721CBF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45DD2807-EE66-47DB-B8C7-93A1C5C85F12} = {45DD2807-EE66-47DB-B8C7-93A1C5C85F12}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
