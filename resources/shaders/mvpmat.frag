@@ -10,6 +10,7 @@ in float quadrant;
 layout(location = 3) uniform sampler2D diffuse;
 layout(location = 4) uniform sampler2D normalMap;
 layout(location = 5) uniform float cutoff;
+layout(location = 6) uniform bool isMirror;
 
 void main()
 {
@@ -31,4 +32,10 @@ void main()
 	//	outColor = lamb * texture(diffuse, vUV);
 	//outColor = normalize(-vNormal); // turns our model's colors into the normals, just to see them
 	//outColor = vec4(0, 1, 1, 1);
+
+	if(isMirror)
+	{
+		outColor = texture(diffuse, vUV);
+		//outColor.b = 1;
+	}
 }

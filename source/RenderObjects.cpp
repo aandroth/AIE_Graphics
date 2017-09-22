@@ -251,3 +251,8 @@ glm::vec3 reflection(const glm::vec3 &norm, const glm::vec3 &v)
 {
 	return v - 2 * projection(norm, v);
 }
+
+glm::vec3 reflection(glm::vec3 &norm, glm::vec3 &v)
+{
+	return v - 2 * projection(norm, v);
+}
