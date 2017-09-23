@@ -66,6 +66,7 @@ int main()
 	Shader standard = loadShader("../../resources/shaders/mvpmat.vert",
 		"../../resources/shaders/mvpmat.frag");
 	Shader mirror_shader = loadShader("../../resources/shaders/mirror.vert", "../../resources/shaders/mirror.frag");
+	Shader phong_shader = loadShader("../../resources/shaders/phong.vert", "../../resources/shaders/phong.frag");
 
 	Shader * shaderPtr = nullptr;
 	shaderPtr = &mirror_shader;
@@ -101,7 +102,7 @@ int main()
 	glm::mat4 go_model(1.0);
 
 	// Light
-	glm::vec3 l_dir = glm::normalize(glm::vec3(1, -1, 1));
+	glm::vec3 l_data = glm::normalize(glm::vec3(1, -1, 1));
 	glm::vec4 l_color = glm::vec4(.7f, .6f, .9f, 1);
 	float     l_intensity = 1.f;
 	glm::vec4 l_ambient = glm::vec4(.2f, .2f, .01f, 1);
@@ -250,14 +251,24 @@ int main()
 		glBindFramebuffer(GL_FRAMEBUFFER, screen.handle);
 		glViewport(0, 0, 800, 600);
 
-		// Cube
+		// Phong Sphere
 		loc = 0, slot = 0;
-		setUniforms(standard, loc, slot,
+		setUniforms(phong_shader, loc, slot,
 			//cam_proj, cam_view,
 			*projPtr, *viewPtr,
 			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			cubeTraMat * rotCamMat * go_model, wall_diffuse, wall_normal, cutoff, false);// , // wall data
-		s0_draw(screen, standard, cube_geo);
+			glm::translate(go_model, 0.f, 1.f, 1.f) * rotCamMat * go_model, wall_diffuse,
+			l_data, l_color, l_intensity, l_ambient, l_type);// , // wall data
+		s0_draw(screen, phong_shader, g);
+
+		//// Sphere
+		//loc = 0, slot = 0;
+		//setUniforms(standard, loc, slot,
+		//	//cam_proj, cam_view,
+		//	*projPtr, *viewPtr,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	rotCamMat * go_model, wall_diffuse, wall_normal, cutoff, false);// , // wall data
+		//s0_draw(screen, standard, g);
 
 		// Sphere
 		loc = 0, slot = 0;
