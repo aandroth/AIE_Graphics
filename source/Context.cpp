@@ -1,5 +1,4 @@
 #include "..\include\graphics\Context.h"
-#include "..\include\graphics\glinc.h"
 #include <iostream>
 using std::cout;
 

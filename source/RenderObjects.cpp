@@ -1,6 +1,5 @@
 #define GLM_FORCE_SWIZZLE
 
-#include "..\include\graphics\Vertex.h"
 #include "..\include\graphics\RenderObjects.h"
 #ifdef _DEBUG
 #include <iostream>
@@ -229,4 +228,25 @@ Framebuffer makeFrameBuffer(unsigned w, unsigned h, unsigned c, bool hasDepth, u
 	glDrawBuffers(retval.nTargets, attachments);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	return retval;
+}
+
+void freeFrameBuffer(Framebuffer &fb)
+{
+	for (unsigned ii = 0; ii < fb.nTargets; ++ii)
+	{
+		freeTexture(fb.targets[ii]);
+	}
+
+	glDeleteFramebuffers(1, &fb.handle);
+	fb = { 0, 0, 0, 0 };
+}
+
+glm::vec3 projection(const glm::vec3 &norm, const glm::vec3 &v)
+{
+	return dot(v, glm::normalize(norm)) * glm::normalize(norm);
+}
+
+glm::vec3 reflection(const glm::vec3 &norm, const glm::vec3 &v)
+{
+	return v - 2 * projection(norm, v);
 }

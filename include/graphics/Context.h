@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RenderObjects.h"
+#include "glinc.h"
 
 struct GLFWwindow;
 

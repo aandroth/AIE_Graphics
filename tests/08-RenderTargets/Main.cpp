@@ -1,11 +1,15 @@
-
-#include "graphics\Context.h"
 #include "graphics\draw.h"
-#include "graphics\RenderObjects.h"
 #include "graphics\Vertex.h"
 #include "graphics\load.h"
-#include "graphics\glm\ext.hpp"
+#include "graphics\Context.h"
 
+#include <iostream>
+void APIENTRY GL_errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
+	GLsizei length, const GLchar *message,
+	const void *userParam)
+{
+	std::cerr << message << std::endl;
+}
 
 int main()
 {
@@ -50,7 +54,7 @@ int main()
 	Shader * shaderPtr = nullptr;
 	shaderPtr = &mirror_shader;
 
-	Framebuffer screen = { 0, 800, 600 };
+	Framebuffer screen = { 1, 800, 600 };
 
 	glm::mat4 *projPtr, *viewPtr;
 
@@ -149,32 +153,32 @@ int main()
 		//mirror_proj = glm::perspective(145.f, 800.f / 600.f, .01f, 100.f);
 		//glm::vec3 reflection_vec = reflection(const glm::vec3 &norm, const glm::vec3 &v)
 
-		//////////////////////////////////////////////////
-		// Mirror Frame Buffer Pass
-		clearFrameBuffer(screen);
-		setFlags(RenderFlag::DEPTH);
-		glBindFramebuffer(GL_FRAMEBUFFER, mBuffer.handle);
-		glViewport(0, 0, 800, 600);
+		////////////////////////////////////////////////////
+		//// Mirror Frame Buffer Pass
+		//clearFrameBuffer(screen);
+		//setFlags(RenderFlag::DEPTH);
+		//glBindFramebuffer(GL_FRAMEBUFFER, mBuffer.handle);
+		//glViewport(0, 0, 800, 600);
 
 		int loc = 0, slot = 0;
 
-		mirror_view = glm::lookAt(glm::vec3(mirror_x, 0, mirror_y),
-			glm::vec3(mirror_x, 0, mirror_y) + glm::vec3(verts[0].normal.x, verts[0].normal.y, -1),
-			glm::vec3(0, 1, 0));
+		//mirror_view = glm::lookAt(glm::vec3(mirror_x, 0, mirror_y),
+		//	glm::vec3(mirror_x, 0, mirror_y) + glm::vec3(verts[0].normal.x, verts[0].normal.y, -1),
+		//	glm::vec3(0, 1, 0));
 
-		// Sphere
-		setUniforms(mirror_shader, loc, slot,
-			mirror_proj, mirror_view,
-			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			rotCamMat * go_model, wall_diffuse, wall_normal, cutoff);// , // wall data
-		s0_draw(mBuffer, standard, g);
+		//// Sphere
+		//setUniforms(mirror_shader, loc, slot,
+		//	mirror_proj, mirror_view,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	rotCamMat * go_model, wall_diffuse, wall_normal, cutoff);// , // wall data
+		//s0_draw(mBuffer, standard, g);
 
-		// Cube
-		setUniforms(mirror_shader, loc, slot,
-			mirror_proj, mirror_view,
-			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			cubeTraMat * rotCamMat * go_model, wall_diffuse, wall_normal, cutoff);// , // wall data
-		s0_draw(mBuffer, standard, cube_geo);
+		//// Cube
+		//setUniforms(mirror_shader, loc, slot,
+		//	mirror_proj, mirror_view,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	cubeTraMat * rotCamMat * go_model, wall_diffuse, wall_normal, cutoff);// , // wall data
+		//s0_draw(mBuffer, standard, cube_geo);
 
 
 		////////////////////////////////////////////////
@@ -207,6 +211,9 @@ int main()
 		s0_draw(screen, standard, mirror_geo);
 	}
 
+	freeFrameBuffer(screen);
+	freeFrameBuffer(mBuffer);
+	freeFrameBuffer(fBuffer);
 	context.term();
 	delete[] verts;
 

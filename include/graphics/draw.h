@@ -1,5 +1,4 @@
 #pragma once
-
 #include "RenderObjects.h"
 
 struct Geometry;

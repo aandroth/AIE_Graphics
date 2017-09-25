@@ -2,6 +2,8 @@
 #include "..\include\graphics\GameObjects.h"
 
 Geometry MakeNGon(int sideCount) {
+	
+	Geometry geo_ngon;
 
 	// Declare ngon side amount
 	size_t ngon_side_count = 49;
@@ -40,7 +42,7 @@ Geometry MakeNGon(int sideCount) {
 	idxs_ngon[kk++] = ngon_side_count;
 	idxs_ngon[kk++] = 1;
 
-	Geometry geo_ngon = MakeGeometry(verts_ngon, ngon_side_count+1,
+	geo_ngon = MakeGeometry(verts_ngon, ngon_side_count+1,
 		idxs_ngon, ngon_idxs_count);
 
 	return geo_ngon;
