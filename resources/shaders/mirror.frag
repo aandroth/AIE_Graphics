@@ -14,5 +14,6 @@ layout(location = 0) out vec4 color;
 void main()
 {
 	color = texture(diffuse, vUV);//cam_proj * cam_view * model * position;
+
 	//outFinal =  texture(diffuse, vUV);
 }

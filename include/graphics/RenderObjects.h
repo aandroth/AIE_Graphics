@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Vertex.h"
 #include "glinc.h"
 #include "glm\geometric.hpp"
+#include "glm\glm.hpp"
 #include "glm\ext.hpp"
 #include "glm\gtc\type_ptr.hpp"
 #include "glm\gtx\matrix_interpolation.hpp"
@@ -35,7 +35,6 @@ struct Texture
 {
 	unsigned handle;
 };
-
 // RGBA = 4 channels
 // 512x512 image = 262144 pizels * 4 channels = ~1million
 Texture makeTexture(unsigned w, unsigned h, unsigned c, const void *pixels, bool isFloat = false);
@@ -133,3 +132,5 @@ struct Mesh
 glm::vec3 projection(const glm::vec3 &norm, const glm::vec3 &v);
 
 glm::vec3 reflection(const glm::vec3 &norm, const glm::vec3 &v);
+
+glm::vec3 reflection(glm::vec3 &norm, glm::vec3 &v);
