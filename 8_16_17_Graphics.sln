@@ -36,6 +36,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09-Shadows", "tests\09-Shad
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10-Deferred", "tests\10-Deferred\10-Deferred.vcxproj", "{744E142E-A264-4A33-B4C8-4B6389A5738E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45DD2807-EE66-47DB-B8C7-93A1C5C85F12} = {45DD2807-EE66-47DB-B8C7-93A1C5C85F12}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03-Tdraw", "tests\03-Tdraw\03-Tdraw.vcxproj", "{9F03E8B9-64F2-4E13-84DD-76BBC75A46FE}"
 	ProjectSection(ProjectDependencies) = postProject

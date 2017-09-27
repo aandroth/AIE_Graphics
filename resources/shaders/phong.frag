@@ -13,7 +13,7 @@ layout(location = 6) uniform float lightInt;
 layout(location = 7) uniform vec4  lightAmb;
 layout(location = 8) uniform float lightTyp;
 
-layout(location = 9) uniform float objSpec;
+layout(location =  9) uniform float objSpec;
 layout(location = 10) uniform vec3 objNorm;
 layout(location = 11) uniform float objGlos;
 
@@ -21,15 +21,17 @@ void main()
 {
 	vec4 surfaceCol = texture(diffuse, vUV);
 
-	float lambertFactor = max(dot(vNormal.xyz, -lightDir), 0); // Keep the result between 0 and 1
+	vec3 normalizedLightDir = -normalize(lightDir);
 
-	vec4 lambertTerm = (surfaceCol * lambertFactor) * lightCol;
+	float lambertFactor = max(dot(vNormal.xyz, normalizedLightDir), 0); // Keep the result between 0 and 1
 
-	vec4 refletionVec = 2 * (lambertFactor) * vNormal.xyz + lightDir;
+	vec4 lambertTerm = (surfaceCol * lambertFactor);
 
-	cam_dir = (view * vec4(1, 1, 1, 1)) - vPos;
+	vec3 reflectionVec = normalizedLightDir - (2 * dot(normalizedLightDir, vNormal.xyz) * vNormal.xyz);
 
-	float specular = pow(dot(cam_dir, reflectionVec), objSpec);
+	vec3 cam_dir = normalize((view * vec4(1, 1, 1, 1)) - vPos).xyz;
+
+	float specular = pow(max(dot(-cam_dir, reflectionVec), 0), objSpec);
 
 	//vec3 L = normalize(vec3(0, -1, 0)); // Light direction
 	//vec3 N = vNormal.xyz;
