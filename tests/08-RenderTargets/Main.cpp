@@ -56,8 +56,10 @@ int main()
 																  // RGB texture (3 channels), 2x1
 	unsigned char pixels[] = { 255, 0, 255, 255, 255, 0 };
 	unsigned char red_pixels[] = { 255, 0, 0, 255, 0, 0 };
+	unsigned char grey_pixels[] = { 135, 135, 135,135, 135, 135 };
 	Texture t_magYel = makeTexture(7, 1, 3, pixels, true);
 	Texture t_red = makeTexture(7, 1, 3, red_pixels, true);
+	Texture t_grey = makeTexture(1, 1, 3, grey_pixels, true);
 
 	Texture wall_normal = loadTexture("../../resources/textures/Blue.jpg");
 	Texture wall_diffuse = loadTexture("../../resources/textures/Blue.jpg");
@@ -102,6 +104,7 @@ int main()
 	glm::mat4 go_model(1.0);
 
 	// Light
+	float l_x = 1, l_y = -1, l_z = 1;
 	glm::vec3 l_data = glm::normalize(glm::vec3(1, -1, 1));
 	glm::vec4 l_color = glm::vec4(.7f, .6f, .9f, 1);
 	float     l_intensity = 1.f;
@@ -121,17 +124,18 @@ int main()
 	while (context.step())
 	{
 		if (context.getKey('A'))
-			angle += 0.01f;
+			l_x -= 0.1f;
 		else if (context.getKey('D'))
-			angle -= 0.01f;
+			l_x += 0.1f;
 		if (context.getKey('W'))
-			up_angle += 0.01f;
+			l_y -= 0.1f;
 		else if (context.getKey('S'))
-			up_angle -= 0.01f;
+			l_y += 0.1f;
 		if (context.getKey('Q'))
-			pos_x += 0.01f;
+			l_z += 0.1f;
 		else if (context.getKey('E'))
-			pos_x -= 0.01f;
+			l_z -= 0.1f;
+		l_data = glm::normalize(glm::vec3(l_x, l_y, l_z));
 		if (context.getKey('Z'))
 			wall_angle += 0.01f;
 		else if (context.getKey('X'))
@@ -218,30 +222,30 @@ int main()
 			glm::vec3(mirror_x, mirror_y, mirror_z) + reflection_vec,
 			glm::vec3(0, -1, 0));
 
-		// Sphere
-		loc = 0, slot = 0;
-		setUniforms(mirror_shader, loc, slot,
-			mirror_proj, mirror_view,
-			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			rotCamMat * go_model, wall_diffuse);// , wall_normal, cutoff);// , // wall data
-		s0_draw(mBuffer, mirror_shader, g);
+		//// Sphere
+		//loc = 0, slot = 0;
+		//setUniforms(mirror_shader, loc, slot,
+		//	mirror_proj, mirror_view,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	rotCamMat * go_model, wall_diffuse);// , wall_normal, cutoff);// , // wall data
+		//s0_draw(mBuffer, mirror_shader, g);
 
-		// Cube
-		loc = 0, slot = 0;
-		setUniforms(mirror_shader, loc, slot,
-			mirror_proj, mirror_view,
-			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			cubeTraMat * rotCamMat * go_model, wall_diffuse);//, wall_normal, cutoff);// , // wall data
-		s0_draw(mBuffer, mirror_shader, cube_geo);
+		//// Cube
+		//loc = 0, slot = 0;
+		//setUniforms(mirror_shader, loc, slot,
+		//	mirror_proj, mirror_view,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	cubeTraMat * rotCamMat * go_model, wall_diffuse);//, wall_normal, cutoff);// , // wall data
+		//s0_draw(mBuffer, mirror_shader, cube_geo);
 
-		// Wall
-		loc = 0, slot = 0;
-		setUniforms(mirror_shader, loc, slot,
-			//cam_proj, cam_view,
-			mirror_proj, mirror_view,
-			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			glm::mat4(1.0f), t_magYel);//, wall_normal, cutoff, true);// , // wall data
-		s0_draw(mBuffer, mirror_shader, far_wall);
+		//// Wall
+		//loc = 0, slot = 0;
+		//setUniforms(mirror_shader, loc, slot,
+		//	//cam_proj, cam_view,
+		//	mirror_proj, mirror_view,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	glm::mat4(1.0f), t_magYel);//, wall_normal, cutoff, true);// , // wall data
+		//s0_draw(mBuffer, mirror_shader, far_wall);
 
 
 		////////////////////////////////////////////////
@@ -257,8 +261,9 @@ int main()
 			//cam_proj, cam_view,
 			*projPtr, *viewPtr,
 			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			glm::translate(go_model, 0.f, 1.f, 1.f) * rotCamMat * go_model, wall_diffuse,
-			l_data, l_color, l_intensity, l_ambient, l_type);// , // wall data
+			glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, wall_diffuse,
+			l_data, l_color, l_intensity, l_ambient, l_type,
+			12.0f);// , // wall data
 		s0_draw(screen, phong_shader, g);
 
 		//// Sphere
@@ -270,14 +275,14 @@ int main()
 		//	rotCamMat * go_model, wall_diffuse, wall_normal, cutoff, false);// , // wall data
 		//s0_draw(screen, standard, g);
 
-		// Sphere
-		loc = 0, slot = 0;
-		setUniforms(standard, loc, slot,
-			//cam_proj, cam_view,
-			*projPtr, *viewPtr,
-			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
-			rotCamMat * go_model, wall_diffuse, wall_normal, cutoff, false);// , // wall data
-		s0_draw(screen, standard, g);
+		//// Sphere
+		//loc = 0, slot = 0;
+		//setUniforms(standard, loc, slot,
+		//	//cam_proj, cam_view,
+		//	*projPtr, *viewPtr,
+		//	//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
+		//	rotCamMat * go_model, wall_diffuse, wall_normal, cutoff, false);// , // wall data
+		//s0_draw(screen, standard, g);
 
 		//// Sphere at LookFrom
 		//loc = 0, slot = 0;
