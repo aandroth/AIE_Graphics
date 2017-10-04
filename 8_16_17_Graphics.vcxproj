@@ -174,7 +174,6 @@
     <None Include="resources\shaders\lambert.frag" />
     <None Include="resources\shaders\lambert.vert" />
     <None Include="resources\shaders\pass_l.frag" />
-    <None Include="resources\shaders\pass_l.vert" />
     <None Include="resources\shaders\mirror.frag" />
     <None Include="resources\shaders\mirror.vert" />
     <None Include="resources\shaders\mvplite.frag" />
@@ -183,6 +182,7 @@
     <None Include="resources\shaders\mvpmat.vert" />
     <None Include="resources\shaders\mvp_mat.frag" />
     <None Include="resources\shaders\mvp_mat.vert" />
+    <None Include="resources\shaders\pass_l.vert" />
     <None Include="resources\shaders\phong.frag" />
     <None Include="resources\shaders\phong.vert" />
     <None Include="resources\shaders\quad.frag" />

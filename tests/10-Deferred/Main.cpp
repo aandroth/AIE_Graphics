@@ -202,6 +202,16 @@ int main()
 			12.0f);// , // wall data
 		s0_draw(screen, passG_shader, goList[0]);
 
+		// Phong Sphere
+		loc = 0, slot = 0;
+		setUniforms(passG_shader, loc, slot,
+			//cam_proj, cam_view,
+			*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
+			*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
+			wall_diffuse,
+			12.0f);// , // wall data
+		s0_draw(screen, passG_shader, goList[1]);
+
 		/*
 		// Mirror
 		loc = 0, slot = 0;
@@ -220,16 +230,6 @@ int main()
 			//go_model, wall_diffuse, wall_specular, wall_normal, wall_gloss, // wall data
 			glm::mat4(1.0f), t_magYel, wall_normal, cutoff, false);// , // wall data
 		s0_draw(screen, passC_shader, goList[2]);*/
-
-		// Phong Sphere
-		loc = 0, slot = 0;
-		setUniforms(passG_shader, loc, slot,
-			//cam_proj, cam_view,
-			*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
-			*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
-			wall_diffuse,
-			12.0f);// , // wall data
-		s0_draw(screen, passG_shader, goList[1]);
 	}
 	
 	context.term();

@@ -1,10 +1,10 @@
-#version 450
+#version 430
 
 // We can create all new visual styles using this, 
 // such as sharpening the light or creating a blur.
 // This may apply to all of the passes, and not just this.
 
-in vec2vUV;
+in vec2 vUV;
 
 layout(location = 1) uniform mat4 view;
 
