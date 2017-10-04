@@ -163,18 +163,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="8_16_17_Graphics.VC.db" />
-    <None Include="resources\shaders\cpass.frag" />
-    <None Include="resources\shaders\cpass.vert" />
+    <None Include="resources\shaders\pass_c.frag" />
+    <None Include="resources\shaders\pass_c.vert" />
     <None Include="resources\shaders\cube.frag" />
     <None Include="resources\shaders\cube.vert" />
     <None Include="resources\shaders\direct.frag" />
     <None Include="resources\shaders\direct.vert" />
-    <None Include="resources\shaders\gpass.frag" />
-    <None Include="resources\shaders\gpass.vert" />
+    <None Include="resources\shaders\pass_g.frag" />
+    <None Include="resources\shaders\pass_g.vert" />
     <None Include="resources\shaders\lambert.frag" />
     <None Include="resources\shaders\lambert.vert" />
-    <None Include="resources\shaders\lpassD.frag" />
-    <None Include="resources\shaders\lpassD.vert" />
+    <None Include="resources\shaders\pass_l.frag" />
+    <None Include="resources\shaders\pass_l.vert" />
     <None Include="resources\shaders\mirror.frag" />
     <None Include="resources\shaders\mirror.vert" />
     <None Include="resources\shaders\mvplite.frag" />

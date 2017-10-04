@@ -19,6 +19,8 @@ layout(location = 6) uniform sampler2D normalMap;
 layout(location = 7) uniform sampler2D positionMap;
 layout(location = 8) uniform sampler2D shadowMap;
 
+clipToUVLightProj
+
 layout(location = 0) uniform vec4 outDiffuse;
 
 uniform float shadowBias;

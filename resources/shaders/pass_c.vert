@@ -6,13 +6,11 @@ layout(location = 3) in vec4 normal;
 
 out vec2 vUV;
 
-layout(location = 0) uniform mat4 proj;
-layout(location = 1) uniform mat4 view;
-layout(location = 2) uniform mat4 model;
+layout(location = 0) uniform mat4 projViewModelMatrix;
 
 void main()
 {
-	gl_Position = proj * view * model * position;
+	gl_Position = projViewModelMatrix * position;
 
 	vUV = texCoord;
 }

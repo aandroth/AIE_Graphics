@@ -65,12 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="8_16_17_Graphics.VC.db" />
-    <None Include="resources\shaders\cpass.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\shaders\cpass.vert">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resources\shaders\cube.frag">
       <Filter>Resource Files</Filter>
     </None>
@@ -83,22 +77,10 @@
     <None Include="resources\shaders\direct.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\shaders\gpass.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\shaders\gpass.vert">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resources\shaders\lambert.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\shaders\lambert.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\shaders\lpassD.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="resources\shaders\lpassD.vert">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\shaders\mvplite.frag">
@@ -147,6 +129,24 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\shaders\phong.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\pass_c.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\pass_c.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\pass_g.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\pass_g.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\pass_l.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shaders\pass_l.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
