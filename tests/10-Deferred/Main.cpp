@@ -76,6 +76,8 @@ int main()
 	Shader * shaderPtr = nullptr;
 	shaderPtr = &mirror_shader;
 
+	Framebuffer gBuffer = { 0, 800, 600 };
+	Framebuffer lBuffer = { 0, 800, 600 };
 	Framebuffer screen = { 0, 800, 600 };
 
 	glm::mat4 *projPtr, *viewPtr;
@@ -132,7 +134,6 @@ int main()
 			l_z += 0.1f;
 		else if (context.getKey('E'))
 			l_z -= 0.1f;
-		l_data = glm::normalize(glm::vec3(l_x, l_y, l_z));
 		if (context.getKey('Z'))
 			wall_angle += 0.01f;
 		else if (context.getKey('X'))
@@ -154,74 +155,54 @@ int main()
 
 		//////////////////////////////////////////////////
 		////  G pass
-		//clearFrameBuffer(screen);
-		//setFlags(RenderFlag::DEPTH);
-		//glBindFramebuffer(GL_FRAMEBUFFER, screen.handle);
-		//glViewport(0, 0, 800, 600);
+		clearFrameBuffer(screen);
+		setFlags(RenderFlag::DEPTH);
+		glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.handle);
+		glViewport(0, 0, 800, 600);
 
-		//// Phong Sphere
-		//int loc = 0, slot = 0;
-		//setUniforms(passG_shader, loc, slot,
-		//	//cam_proj, cam_view,
-		//	*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
-		//	*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
-		//	wall_diffuse,
-		//	12.0f);// , // wall data
-		//s0_draw(screen, passG_shader, goList[0]);
+		// Phong Sphere
+		int loc = 0, slot = 0;
+		setUniforms(passG_shader, loc, slot,
+			//cam_proj, cam_view,
+			*projPtr * *viewPtr * rotCamMat * go_model, //proj view model matrix
+			*viewPtr * rotCamMat * go_model, // view model matrix
+			wall_diffuse,
+			12.0f);// , // wall data
+		s0_draw(gBuffer, passG_shader, goList[0]);
 
-		//// Phong Sphere
-		//loc = 0, slot = 0;
-		//setUniforms(passG_shader, loc, slot,
-		//	//cam_proj, cam_view,
-		//	*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
-		//	*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
-		//	wall_diffuse,
-		//	12.0f);// , // wall data
-		//s0_draw(screen, passG_shader, goList[1]);
+		// Phong Sphere
+		loc = 0, slot = 0;
+		setUniforms(passG_shader, loc, slot,
+			//cam_proj, cam_view,
+			*projPtr * *viewPtr * rotCamMat * go_model, //proj view model matrix
+			*viewPtr * rotCamMat * go_model, // view model matrix
+			wall_diffuse,
+			12.0f);// , // wall data
+		s0_draw(gBuffer, passG_shader, goList[1]);
 
 
 		////////////////////////////////////////////////
 		//  L pass
 		clearFrameBuffer(screen);
 		setFlags(RenderFlag::DEPTH);
-		glBindFramebuffer(GL_FRAMEBUFFER, screen.handle);
+		glBindFramebuffer(GL_FRAMEBUFFER, lBuffer.handle);
 		glViewport(0, 0, 800, 600);
 
 		glm::mat4 clipToUVLightProjLightViewInverseCamView_Matrix = clipToUV * l_proj * l_view * glm::inverse(cam_view);
 
 		// Phong Sphere
-		int loc = 0, slot = 0;
+		loc = 0, slot = 0;
 		setUniforms(passL_shader, loc, slot,
 			//cam_proj, cam_view,
-			*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
-			*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
-			wall_diffuse,
-			12.0f);// , // wall data
-		s0_draw(screen, passL_shader, goList[0]);
+			clipToUVLightProjLightViewInverseCamView_Matrix * go_model, l_color, l_intensity, gBuffer.targets[1], gBuffer.targets[2]);// , // wall data
+		s0_draw(lBuffer, passL_shader, goList[0]);
 
 		// Phong Sphere
 		loc = 0, slot = 0;
 		setUniforms(passL_shader, loc, slot,
 			//cam_proj, cam_view,
-			*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
-			*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
-			wall_diffuse,
-			12.0f);// , // wall data
-		s0_draw(screen, passL_shader, goList[1]);
-
-
-		layout(location = 0) uniform mat4 view;
-
-		layout(location = 1) uniform mat4 lightProj;
-		layout(location = 2) uniform mat4 lightView;
-
-		layout(location = 3) uniform mat4 lightColor;
-		layout(location = 4) uniform float intensity;
-
-
-		layout(location = 5) uniform sampler2D normalMap;
-		layout(location = 6) uniform sampler2D positionMap;
-		layout(location = 7) uniform sampler2D shadowMap;
+			clipToUVLightProjLightViewInverseCamView_Matrix * go_model, l_color, l_intensity, gBuffer.targets[1], gBuffer.targets[2]);// , // wall data
+		s0_draw(lBuffer, passL_shader, goList[1]);
 
 		/*
 		// Mirror

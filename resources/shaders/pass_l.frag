@@ -11,8 +11,8 @@ layout(location = 0) uniform mat4 clipToUVLightProjLightViewInverseCamView_Matri
 layout(location = 1) uniform mat4 lightColor;
 layout(location = 2) uniform float intensity;
 
-layout(location = 3) uniform sampler2D normalMap;
-layout(location = 4) uniform sampler2D positionMap;
+layout(location = 3) uniform sampler2D positionMap;
+layout(location = 4) uniform sampler2D normalMap;
 
 clipToUVLightProj
 
