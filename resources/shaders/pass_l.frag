@@ -6,35 +6,26 @@
 
 in vec2 vUV;
 
-layout(location = 1) uniform mat4 view;
+layout(location = 0) uniform mat4 clipToUVLightProjLightViewInverseCamView_Matrix;
 
-layout(location = 2) uniform mat4 lightProj;
-layout(location = 3) uniform mat4 lightView;
+layout(location = 1) uniform mat4 lightColor;
+layout(location = 2) uniform float intensity;
 
-layout(location = 4) uniform mat4 lightColor;
-layout(location = 5) uniform float intensity;
-
-
-layout(location = 6) uniform sampler2D normalMap;
-layout(location = 7) uniform sampler2D positionMap;
-layout(location = 8) uniform sampler2D shadowMap;
+layout(location = 3) uniform sampler2D normalMap;
+layout(location = 4) uniform sampler2D positionMap;
 
 clipToUVLightProj
 
-layout(location = 0) uniform vec4 outDiffuse;
+layout(location = 0) out vec4 outDiffuse;
 
 uniform float shadowBias;
 
-// Simple matrix that converts from clip-space (-1, 1) to UV space (0, 1)
-uniform mat4 clipToUV = mat4(0.5f, 0.0f, 0.0f, 0.0f
-							0.0f, 0.5f, 0.0f, 0.0f,
-							0.0f, 0.0f, 0.5f, 0.0f
-							0.5f, 0.5f, 0.5f, 1.0f);
-
 void main()
 {
+	shadowBias = 0.01f;
+
 	vec4 vPos = texture(positionMap, vUV);
-	vec4 sUV = clipToUV * lightProj * lightView * inverse(view) * vPos;
+	vec4 sUV = clipToUVLightProjLightViewInverseCamView_Matrix * vPos;
 
 	float visibility = 1;
 	if(texture(shadowMap, sUV).r < sUV.z - shadowBias)

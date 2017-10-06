@@ -68,8 +68,9 @@ int main()
 
 	Shader standard      = loadShader("../../resources/shaders/mvpmat.vert", "../../resources/shaders/mvpmat.frag");
 	Shader mirror_shader = loadShader("../../resources/shaders/mirror.vert", "../../resources/shaders/mirror.frag");
-	Shader phong_shader  = loadShader("../../resources/shaders/phong.vert", "../../resources/shaders/phong.frag");
-	Shader passG_shader = loadShader("../../resources/shaders/pass_g.vert", "../../resources/shaders/pass_g.frag");
+	Shader phong_shader  = loadShader("../../resources/shaders/phong.vert",  "../../resources/shaders/phong.frag");
+	Shader passG_shader  = loadShader("../../resources/shaders/pass_g.vert", "../../resources/shaders/pass_g.frag");
+	Shader passL_shader  = loadShader("../../resources/shaders/pass_l.vert", "../../resources/shaders/pass_l.frag");
 	Shader passC_shader  = loadShader("../../resources/shaders/pass_c.vert", "../../resources/shaders/pass_c.frag");
 
 	Shader * shaderPtr = nullptr;
@@ -88,16 +89,6 @@ int main()
 
 	glm::mat4 cam_proj = glm::perspective(145.f, 800.f / 600.f, .01f, 100.f);
 
-	// Mirror
-	float mirror_angle = 0, mirror_angle_y = 0, mirror_x = 0, mirror_y = 0, mirror_z = 0;
-
-
-	// MirrorCam
-	glm::mat4 mirror_view = glm::lookAt(glm::vec3(mirror_x + 0.5f, mirror_y - 1.5f, mirror_z - 0.5f),
-		glm::vec3(0, 0, 1),
-		glm::vec3(0, 1, 0));
-
-	glm::mat4 mirror_proj = glm::perspective(200.f, 1.f, .01f, 100.f);
 
 	projPtr = &cam_proj;
 	viewPtr = &cam_view;
@@ -107,18 +98,25 @@ int main()
 
 	// Light
 	float l_x = 1, l_y = -1, l_z = 1;
-	glm::vec3 l_data = glm::normalize(glm::vec3(1, -1, 1));
+	glm::vec3 l_dir = glm::normalize(glm::vec3(1, -1, -1));
+	glm::mat4 l_proj = glm::ortho<float>(-10, 10, -10, 10, -10, 10);
+	glm::mat4 l_view = glm::lookAt(-l_dir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::vec4 l_color = glm::vec4(.7f, .6f, .9f, 1);
 	float     l_intensity = 1.f;
 	glm::vec4 l_ambient = glm::vec4(.2f, .2f, .01f, 1);
 	int       l_type = 0;
 
-	Framebuffer fBuffer = makeFrameBuffer(800, 600, 4, true, 3, 1);
-	Framebuffer mBuffer = makeFrameBuffer(800, 600, 4, true, 1, 0);
-
 	glm::mat4 rotCamMat(1.0);
 
 	float angle = 0, up_angle = 0, wall_angle = 0, cutoff = 0;
+
+
+
+	// Simple matrix that converts from clip-space (-1, 1) to UV space (0, 1)
+	glm::mat4 clipToUV{ 0.5f, 0.0f, 0.0f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.5f, 1.0f };
 
 	while (context.step())
 	{
@@ -140,39 +138,8 @@ int main()
 		else if (context.getKey('X'))
 			wall_angle -= 0.01f;
 
-		// Move the mirror around
-		if (context.getKey('J'))
-			mirror_x -= 0.01f;
-		else if (context.getKey('L'))
-			mirror_x += 0.01f;
-		if (context.getKey('U'))
-			mirror_y += 0.01f;
-		else if (context.getKey('O'))
-			mirror_y -= 0.01f;
-		if (context.getKey('I'))
-			mirror_z -= 0.01f;
-		else if (context.getKey('K'))
-			mirror_z += 0.01f;
-		if (context.getKey('['))
-			mirror_angle -= 0.01f;
-		else if (context.getKey(']'))
-			mirror_angle += 0.01f;
-		if (context.getKey(','))
-			mirror_angle_y -= 0.01f;
-		else if (context.getKey('.'))
-			mirror_angle_y += 0.01f;
-		if (context.getKey('N'))
-		{
-			shaderPtr = &mirror_shader;
-			projPtr = &mirror_proj;
-			viewPtr = &mirror_view;
-		}
-		else if (context.getKey('M'))
-		{
-			shaderPtr = &standard;
-			projPtr = &cam_proj;
-			viewPtr = &cam_view;
-		}
+		projPtr = &cam_proj;
+		viewPtr = &cam_view;
 
 		cam_view = glm::lookAt(glm::vec3(pos_x, 3, -4),
 			glm::vec3(0, 0, 0),
@@ -185,32 +152,76 @@ int main()
 
 
 
+		//////////////////////////////////////////////////
+		////  G pass
+		//clearFrameBuffer(screen);
+		//setFlags(RenderFlag::DEPTH);
+		//glBindFramebuffer(GL_FRAMEBUFFER, screen.handle);
+		//glViewport(0, 0, 800, 600);
+
+		//// Phong Sphere
+		//int loc = 0, slot = 0;
+		//setUniforms(passG_shader, loc, slot,
+		//	//cam_proj, cam_view,
+		//	*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
+		//	*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
+		//	wall_diffuse,
+		//	12.0f);// , // wall data
+		//s0_draw(screen, passG_shader, goList[0]);
+
+		//// Phong Sphere
+		//loc = 0, slot = 0;
+		//setUniforms(passG_shader, loc, slot,
+		//	//cam_proj, cam_view,
+		//	*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
+		//	*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
+		//	wall_diffuse,
+		//	12.0f);// , // wall data
+		//s0_draw(screen, passG_shader, goList[1]);
+
+
 		////////////////////////////////////////////////
-		//  Screen pass
+		//  L pass
 		clearFrameBuffer(screen);
 		setFlags(RenderFlag::DEPTH);
 		glBindFramebuffer(GL_FRAMEBUFFER, screen.handle);
 		glViewport(0, 0, 800, 600);
 
+		glm::mat4 clipToUVLightProjLightViewInverseCamView_Matrix = clipToUV * l_proj * l_view * glm::inverse(cam_view);
+
 		// Phong Sphere
 		int loc = 0, slot = 0;
-		setUniforms(passG_shader, loc, slot,
+		setUniforms(passL_shader, loc, slot,
 			//cam_proj, cam_view,
 			*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
 			*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
 			wall_diffuse,
 			12.0f);// , // wall data
-		s0_draw(screen, passG_shader, goList[0]);
+		s0_draw(screen, passL_shader, goList[0]);
 
 		// Phong Sphere
 		loc = 0, slot = 0;
-		setUniforms(passG_shader, loc, slot,
+		setUniforms(passL_shader, loc, slot,
 			//cam_proj, cam_view,
 			*projPtr * *viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, //proj view model matrix
 			*viewPtr * glm::translate(go_model, glm::vec3(mirror_x, mirror_y, mirror_z)) * rotCamMat * go_model, // view model matrix
 			wall_diffuse,
 			12.0f);// , // wall data
-		s0_draw(screen, passG_shader, goList[1]);
+		s0_draw(screen, passL_shader, goList[1]);
+
+
+		layout(location = 0) uniform mat4 view;
+
+		layout(location = 1) uniform mat4 lightProj;
+		layout(location = 2) uniform mat4 lightView;
+
+		layout(location = 3) uniform mat4 lightColor;
+		layout(location = 4) uniform float intensity;
+
+
+		layout(location = 5) uniform sampler2D normalMap;
+		layout(location = 6) uniform sampler2D positionMap;
+		layout(location = 7) uniform sampler2D shadowMap;
 
 		/*
 		// Mirror
