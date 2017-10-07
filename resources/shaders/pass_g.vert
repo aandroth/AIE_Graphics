@@ -3,6 +3,8 @@
 layout(location = 0) in vec4 position;
 layout(location = 2) in vec2 texCoord;
 layout(location = 3) in vec4 normal;
+layout(location = 4) in vec2 tangent;
+layout(location = 5) in vec4 bitangent;
 
 layout(location = 0) uniform mat4 projViewModelMatrix;
 layout(location = 1) uniform mat4 viewModelMatrix;
@@ -18,7 +20,7 @@ void main()
 
 	vUV = texCoord;
 
-	vPos = projViewModelMatrix * position;
+	vPos = (projViewModelMatrix * position).xyz;
 
 	vTBN = viewModelMatrix * mat4(tangent, bitangent, normal, vec4(0, 0, 0, 0));
 
